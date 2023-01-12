@@ -37,7 +37,20 @@ export const AddDriver = () => {
       });
       const data: DriverEntity = await res.json();
       setLoading(false);
-      setResultInfo(`${data.name} added with ID ${data.id}`);
+      setResultInfo(`${data.name} added with ref: ${data.referenceNumber}`);
+
+      setTimeout(() => {
+        setResultInfo(null);
+        setForm({
+          name: "",
+          lastName: "",
+          phoneNumber: 0,
+          referenceNumber: "",
+          truckNumber: "",
+          trailerNumber: "",
+          loadingUnloading: Action.loading,
+        });
+      }, 2000);
     } finally {
       setLoading(false);
     }
@@ -55,11 +68,8 @@ export const AddDriver = () => {
             <p>
               <strong>{resultInfo}</strong>
             </p>
+            <p>Thank you. Please wait in your truck</p>
           </div>
-          <button type="submit" onClick={() => setResultInfo(null)}>
-            {" "}
-            Add another one
-          </button>
         </>
       </>
     );
@@ -69,6 +79,7 @@ export const AddDriver = () => {
     <>
       <form onSubmit={sendForm}>
         <h2>Driver registration</h2>
+        <br />
         <label>
           Name: <br />
           <input
@@ -127,7 +138,7 @@ export const AddDriver = () => {
           Loading/Unloading: <br />
           <select
             value={form.loadingUnloading}
-            onChange={(e) => updateForm("trailerNumber", e.target.value)}
+            onChange={(e) => updateForm("loadingUnloading", e.target.value)}
           >
             <option>loading</option>
             <option>unloading</option>
