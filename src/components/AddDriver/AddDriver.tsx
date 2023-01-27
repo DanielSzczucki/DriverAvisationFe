@@ -1,5 +1,5 @@
 import React, { FormEvent, useState } from "react";
-import { Action, CreateDriverReq, CreateLoadReq, DriverEntity } from "types";
+import { CreateDriverReq, CreateLoadReq, DriverEntity } from "types";
 import { SpinnerLoading } from "../common/SpinnerLoading/SpinnerLoading";
 
 export const AddDriver = () => {
@@ -10,7 +10,7 @@ export const AddDriver = () => {
     referenceNumber: "",
     truckNumber: "",
     trailerNumber: "",
-    loadingUnloading: Action.loading,
+    loadingUnloading: "",
   });
 
   const [loading, setLoading] = useState<boolean>(false);
@@ -39,18 +39,18 @@ export const AddDriver = () => {
       setLoading(false);
       setResultInfo(`${data.name} added with ref: ${data.referenceNumber}`);
 
-      setTimeout(() => {
-        setResultInfo(null);
-        setForm({
-          name: "",
-          lastName: "",
-          phoneNumber: 0,
-          referenceNumber: "",
-          truckNumber: "",
-          trailerNumber: "",
-          loadingUnloading: Action.loading,
-        });
-      }, 2000);
+      // setTimeout(() => {
+      //   setResultInfo(null);
+      //   setForm({
+      //     name: "",
+      //     lastName: "",
+      //     phoneNumber: 0,
+      //     referenceNumber: "",
+      //     truckNumber: "",
+      //     trailerNumber: "",
+      //     loadingUnloading: "unloadning",
+      //   });
+      // }, 2000);
     } finally {
       setLoading(false);
     }
