@@ -5,7 +5,6 @@ export const Header = () => {
   return (
     <>
       <h1>Cargo management app</h1>
-      <LoadsList />
     </>
   );
 };
