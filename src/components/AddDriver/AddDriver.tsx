@@ -11,6 +11,7 @@ export const AddDriver = () => {
     truckNumber: "",
     trailerNumber: "",
     loadingUnloading: "",
+    loadId: "",
   });
 
   const [loading, setLoading] = useState<boolean>(false);
