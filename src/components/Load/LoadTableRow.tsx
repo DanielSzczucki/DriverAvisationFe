@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import { LoadEntity } from "types";
 
@@ -11,7 +12,9 @@ export const LoadTableRow = (props: Props) => {
   return (
     <>
       <tr>
-        <td>{props.load.loadName}</td>
+        <td>
+          <Link to={`/load/${props.load.id}`}>{props.load.loadName}</Link>
+        </td>
         <td>{props.load.referenceNumber}</td>
         <td>{props.load.sender}</td>
         <td>{props.load.recipient}</td>
