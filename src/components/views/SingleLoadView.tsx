@@ -12,12 +12,14 @@ export const SingleLoadView = () => {
 
   useEffect(() => {
     (async () => {
-      const loadRes = await fetch(`http://localhost:3001/load/${singleLoadId}`);
+      const loadRes = await fetch(
+        `http://localhost:3001/load/:${singleLoadId}`
+      );
       const loadData = await loadRes.json();
       setLoadInfo(loadData);
 
       const driverRes = await fetch(
-        `http://localhost:3001/driver/ef273244-9fbe-11ed-be26-b00d2ebe2fb0`
+        `http://localhost:3001/driver/:${loadInfo?.load.driverId}`
       );
       const driverData = await driverRes.json();
       console.log(driverData);
@@ -35,6 +37,7 @@ export const SingleLoadView = () => {
       <p>Load Id: {loadInfo.load.id}</p>
       <p>Sender: {loadInfo.load.sender}</p>
       <p>Recipient: {loadInfo.load.recipient}</p>
+      <p>Frowarder: {loadInfo.load.forwarder}</p>
       <p>Units: {loadInfo.load.units}</p>
       <p>Quantity: {loadInfo.load.quantity}</p>
       <p>Weight: {loadInfo.load.weight}</p>
