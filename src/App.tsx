@@ -6,6 +6,8 @@ import { Header } from "./components/Header/Header";
 import { Routes, Route } from "react-router-dom";
 import { SingleLoadView } from "./components/views/SingleLoadView";
 import { LoadsList } from "./components/Load/LoadsList";
+import { DriverList } from "./components/Driver/DriversList";
+import { SingleDriverView } from "./components/views/SingleDriverView";
 
 function App() {
   return (
@@ -14,6 +16,11 @@ function App() {
       <Routes>
         <Route path="/load" element={<LoadsList />}></Route>
         <Route path="/load/:singleLoadId" element={<SingleLoadView />}></Route>
+        <Route path="/driver" element={<DriverList />}></Route>
+        <Route
+          path="/driver/:singleDriverId"
+          element={<SingleDriverView />}
+        ></Route>
       </Routes>
     </>
   );

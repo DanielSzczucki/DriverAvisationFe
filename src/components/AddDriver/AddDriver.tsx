@@ -8,6 +8,7 @@ export const AddDriver = () => {
     lastName: "",
     phoneNumber: 0,
     referenceNumber: "",
+    companyName: "",
     truckNumber: "",
     trailerNumber: "",
     loadingUnloading: "",
@@ -114,6 +115,15 @@ export const AddDriver = () => {
             type="text"
             value={form.referenceNumber}
             onChange={(e) => updateForm("referenceNumber", e.target.value)}
+          />
+        </label>
+        <br />
+        <label>
+          Your Company Name: <br />
+          <input
+            type="text"
+            value={form.companyName}
+            onChange={(e) => updateForm("companyName", e.target.value)}
           />
         </label>
         <br />
