@@ -20,7 +20,7 @@ export const SingleLoadView = () => {
         `http://localhost:3001/driver/ef273244-9fbe-11ed-be26-b00d2ebe2fb0`
       );
       const driverData = await driverRes.json();
-      console.log(driverData);
+
       setDriverInfo(driverData);
     })();
   }, []);
