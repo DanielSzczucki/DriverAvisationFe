@@ -4,10 +4,11 @@ import { SpinnerLoading } from "../common/SpinnerLoading/SpinnerLoading";
 
 export const AddDriver = () => {
   const [form, setForm] = useState<CreateDriverReq>({
+    referenceNumber: "",
     name: "",
     lastName: "",
+    companyName: "",
     phoneNumber: 0,
-    referenceNumber: "",
     truckNumber: "",
     trailerNumber: "",
     loadingUnloading: "",
