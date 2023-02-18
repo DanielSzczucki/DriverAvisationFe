@@ -3,8 +3,8 @@ import { LoadsList } from "../Load/LoadsList";
 
 export const Header = () => {
   return (
-    <>
+    <div className="box">
       <h1>Cargo management app</h1>
-    </>
+    </div>
   );
 };

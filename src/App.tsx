@@ -11,18 +11,21 @@ import { SingleDriverView } from "./components/views/SingleDriverView";
 
 function App() {
   return (
-    <>
+    <div className="App box">
       <Header />
       <Routes>
+        <Route path="/" element={<AddDriver />}></Route>
         <Route path="/load" element={<LoadsList />}></Route>
+
         <Route path="/load/:singleLoadId" element={<SingleLoadView />}></Route>
         <Route path="/driver" element={<DriverList />}></Route>
+        <Route path="/driver/add" element={<AddDriver />}></Route>
         <Route
           path="/driver/:singleDriverId"
           element={<SingleDriverView />}
         ></Route>
       </Routes>
-    </>
+    </div>
   );
 }
 

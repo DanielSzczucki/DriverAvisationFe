@@ -1,0 +1,10 @@
+@import "../../styles/variables.css";
+
+/* .AddDriver {
+  background-color: var(--color-background-dark);
+  color: var(--color-text-light);
+} */
+
+input {
+  width: 100%;
+}

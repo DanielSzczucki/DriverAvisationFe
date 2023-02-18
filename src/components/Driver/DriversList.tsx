@@ -23,9 +23,9 @@ export const DriverList = () => {
   }
 
   return (
-    <>
+    <div className="App">
       <h2>Drivers</h2>
       <DriversTable driversList={data?.driverList} loadsList={data.loadList} />
-    </>
+    </div>
   );
 };

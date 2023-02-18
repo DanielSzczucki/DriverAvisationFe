@@ -1,5 +1,5 @@
 :root {
-  --color-base-hue: 198;
+  --color-base-hue: 200;
   --color-danger-hue-offset: 180;
   --color-danger-hue: calc(
     var(--color-base-hue) - var(--color-danger-hue-offset)
@@ -10,41 +10,17 @@
   --color-text-light: hsl(var(--color-base-hue), 100%, 87%);
 }
 
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-box {
+.box {
   background-color: var(--color-background-dark);
-  min-height: 10vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: var(--color-text-light);
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  border: 2px solid red;
+  border-radius: 10px;
+  padding: 2%;
+  width: 90%;
+  margin: 2%;
 }
