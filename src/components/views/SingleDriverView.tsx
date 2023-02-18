@@ -15,16 +15,22 @@ export const SingleDriverView = () => {
       const driverRes = await fetch(
         `http://localhost:3001/driver/${singleDriverId}`
       );
+
       const driverData = await driverRes.json();
       setDriverInfo(driverData);
+      console.log(driverData);
+    })();
+  }, []);
 
+  useEffect(() => {
+    (async () => {
       const loadRes = await fetch(
         `http://localhost:3001/load/${driverInfo?.driver.loadId}`
       );
       const loadData = await loadRes.json();
       setLoadInfo(loadData);
     })();
-  }, []);
+  }, [driverInfo]);
 
   if (driverInfo === null) {
     return null;
@@ -42,8 +48,8 @@ export const SingleDriverView = () => {
       <p>Phone: {driverInfo?.driver.phoneNumber}</p>
       <p>Truck: {driverInfo?.driver.truckNumber}</p>
       <p>Trailer: {driverInfo?.driver.trailerNumber}</p>
-      <p>Load Name: {loadInfo?.load.loadName}</p>
-      <p>Counted given loads: {loadInfo?.givenCount}</p>
+      <p>Load Name: {loadInfo?.load.loadName ?? "not sign"}</p>
+      <p>Counted given loads: {loadInfo?.givenCount ?? "not sign"}</p>
       <p>
         <Link to="/driver">Go back to list</Link>
       </p>

@@ -8,7 +8,6 @@ interface Props {
 }
 
 export const LoadsTable = (props: Props) => {
-  console.log(props);
   return (
     <>
       <table>
