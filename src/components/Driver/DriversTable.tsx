@@ -2,6 +2,9 @@ import React from "react";
 import { DriverEntity, LoadEntity } from "types";
 import { DriverTableRow } from "./DriverTableRow";
 
+import "./Table.css";
+import { Link } from "react-router-dom";
+
 interface Props {
   driversList: DriverEntity[];
   loadsList: LoadEntity[];
@@ -11,7 +14,7 @@ export const DriversTable = (props: Props) => {
   console.log(props);
   return (
     <>
-      <table>
+      <table className="Table">
         <thead>
           <tr>
             <th> Driver name </th>
@@ -21,7 +24,7 @@ export const DriversTable = (props: Props) => {
             <th> Last name</th>
             <th> Truck No.</th>
             <th> Trailer No. </th>
-            <th> Loading/unloading </th>
+            <th> Statusg </th>
             <th> Load id </th>
           </tr>
         </thead>

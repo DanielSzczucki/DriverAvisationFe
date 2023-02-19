@@ -19,6 +19,12 @@
 
 /* rgba(var(--color-base-hue), 80, 206, 0.18); */
 
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
 
 
 .box {

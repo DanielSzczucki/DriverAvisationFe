@@ -1,0 +1,64 @@
+@import "../../styles/variables.css";
+
+.table {
+  width: 96%;
+  max-width: 1200px;
+  text-transform: lowercase;
+}
+
+.table h2 {
+  font-size: 1.5rem;
+  padding: 2%;
+}
+
+.table a {
+  text-decoration: none;
+  list-style: none;
+  background-color: var(--color-background-light);
+  border-radius: 10px;
+  padding: 2% 4%;
+  font-weight: 500;
+  color: var(--color-text-light);
+}
+
+.table a:hover {
+  background-color: gray;
+  padding: 4% 8%;
+  color: var(--color-text-contrast);
+}
+
+th {
+  padding: 0.5%;
+  font-size: 1rem;
+  text-align: center;
+  color: var(--color-text-contrast);
+}
+
+th::first-letter {
+  text-transform: uppercase;
+}
+
+tr {
+  width: 100%;
+  font-size: 1rem;
+  text-align: center;
+  color: var(--color-text-light);
+  border: 1px solid red;
+}
+
+tr:nth-child(even) {
+  background-color: var(--color-background-light);
+}
+
+td {
+  padding: 0.5%;
+  font-size: 0.9rem;
+}
+
+td:first-child {
+  color: var(--color-text-contrast);
+}
+
+td:first-letter {
+  text-transform: uppercase;
+}

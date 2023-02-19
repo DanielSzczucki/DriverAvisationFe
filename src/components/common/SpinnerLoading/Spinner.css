@@ -1,10 +1,12 @@
+@import "../../../styles/variables.css";
+
 .Spinner,
 .Spinner:before,
 .Spinner:after {
   border-radius: 50%;
 }
 .Spinner {
-  color: #34e38f;
+  color: var(--color-text-contrast);
   font-size: 11px;
   text-indent: -99999em;
   margin: 55px auto;
@@ -24,7 +26,7 @@
 .Spinner:before {
   width: 5.2em;
   height: 10.2em;
-  background: #fefefe;
+  background: var(--color-background-dark);
   border-radius: 10.2em 0 0 10.2em;
   top: -0.1em;
   left: -0.1em;
@@ -36,7 +38,7 @@
 .Spinner:after {
   width: 5.2em;
   height: 10.2em;
-  background: #ffffff;
+  background: var(--color-background-dark);
   border-radius: 0 10.2em 10.2em 0;
   top: -0.1em;
   left: 4.9em;

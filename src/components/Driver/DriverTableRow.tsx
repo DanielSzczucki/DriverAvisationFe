@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
 import { DriverEntity, LoadEntity } from "types";
+
+import "./Table.css";
 
 interface Props {
   driver: DriverEntity;

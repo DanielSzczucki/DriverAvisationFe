@@ -4,6 +4,8 @@ import { DriverEntity, ListDriverRes, LoadEntity } from "types";
 import { SpinnerLoading } from "../common/SpinnerLoading/SpinnerLoading";
 import { DriversTable } from "./DriversTable";
 
+import "./Table.css";
+
 export const DriverList = () => {
   const [data, setData] = useState<ListDriverRes | null>(null);
 
@@ -23,7 +25,7 @@ export const DriverList = () => {
   }
 
   return (
-    <div className="App">
+    <div className="box glass table">
       <h2>Drivers</h2>
       <DriversTable driversList={data?.driverList} loadsList={data.loadList} />
     </div>
