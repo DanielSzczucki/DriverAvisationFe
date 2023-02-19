@@ -8,6 +8,7 @@ import { SingleLoadView } from "./components/views/SingleLoadView";
 import { LoadsList } from "./components/Load/LoadsList";
 import { DriverList } from "./components/Driver/DriversList";
 import { SingleDriverView } from "./components/views/SingleDriverView";
+import { ErrorView } from "./components/views/ErrorView";
 
 function App() {
   return (
@@ -25,6 +26,8 @@ function App() {
         <Route path="/load" element={<LoadsList />}></Route>
 
         <Route path="/load/:singleLoadId" element={<SingleLoadView />}></Route>
+
+        <Route path="*" element={<ErrorView />} />
       </Routes>
     </div>
   );

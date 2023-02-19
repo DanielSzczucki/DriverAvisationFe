@@ -43,7 +43,7 @@ export const SingleLoadView = () => {
 
   return (
     <>
-      <div className="glass Views">
+      <div className="glass views">
         <h2>{loadInfo?.load.loadName}</h2>
         <p>Load Id: {loadInfo?.load.id}</p>
         <p>Sender: {loadInfo?.load.sender}</p>

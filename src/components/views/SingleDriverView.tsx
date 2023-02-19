@@ -39,7 +39,7 @@ export const SingleDriverView = () => {
 
   return (
     <>
-      <div className="glass Views">
+      <div className="glass views">
         <h2>{driverInfo?.driver.name}</h2>
         <p>
           Driver: {driverInfo?.driver.name} {driverInfo?.driver.lastName}
