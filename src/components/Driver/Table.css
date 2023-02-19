@@ -1,9 +1,9 @@
 @import "../../styles/variables.css";
 
 .table {
-  width: 96%;
+  width: 96vw;
   max-width: 1200px;
-  text-transform: lowercase;
+  text-transform: uppercase;
 }
 
 .table h2 {
@@ -28,18 +28,15 @@
 }
 
 th {
+  width: auto;
   padding: 0.5%;
   font-size: 1rem;
   text-align: center;
   color: var(--color-text-contrast);
 }
 
-th::first-letter {
-  text-transform: uppercase;
-}
-
 tr {
-  width: 100%;
+  width: auto;
   font-size: 1rem;
   text-align: center;
   color: var(--color-text-light);
@@ -51,7 +48,7 @@ tr:nth-child(even) {
 }
 
 td {
-  padding: 0.5%;
+  padding: 1%;
   font-size: 0.9rem;
 }
 
@@ -59,6 +56,13 @@ td:first-child {
   color: var(--color-text-contrast);
 }
 
-td:first-letter {
-  text-transform: uppercase;
+@media (max-width: 480px) {
+  .table h2 {
+    font-size: 1rem;
+  }
+
+  th,
+  td {
+    font-size: 0.7rem;
+  }
 }

@@ -35,32 +35,34 @@ export const SingleLoadView = () => {
 
   //     setDriverInfo(driverData);
   //   })();
-  // }, []);
+  // }, [loadInfo]);
 
-  // if (loadInfo === null) {
-  //   return null;
-  // }
+  if (loadInfo === null) {
+    return null;
+  }
 
   return (
     <>
-      <h2>{loadInfo?.load.loadName}</h2>
-      <p>Load Id: {loadInfo?.load.id}</p>
-      <p>Sender: {loadInfo?.load.sender}</p>
-      <p>Recipient: {loadInfo?.load.recipient}</p>
-      <p>Frowarder: {loadInfo?.load.forwarder}</p>
-      <p>Units: {loadInfo?.load.units}</p>
-      <p>Quantity: {loadInfo?.load.quantity}</p>
-      <p>Weight: {loadInfo?.load.weight}</p>
-      {/* <p>
-        Driver: {driverInfo?.driver.name ?? "not sign"}{" "}
-        {driverInfo?.driver.lastName ?? "not sign"}
-      </p>
-      <p>Truck: {driverInfo?.driver.truckNumber ?? "not sign"}</p>
-      <p>Trailer: {driverInfo?.driver.trailerNumber ?? "not sign"}</p>
-      <p>Counted given loads: {loadInfo?.givenCount ?? "not sign"}</p> */}
-      <p>
-        <Link to="/load">Go back to list</Link>
-      </p>
+      <div className="glass Views">
+        <h2>{loadInfo?.load.loadName}</h2>
+        <p>Load Id: {loadInfo?.load.id}</p>
+        <p>Sender: {loadInfo?.load.sender}</p>
+        <p>Recipient: {loadInfo?.load.recipient}</p>
+        <p>Frowarder: {loadInfo?.load.forwarder}</p>
+        <p>Units: {loadInfo?.load.units}</p>
+        <p>Quantity: {loadInfo?.load.quantity}</p>
+        <p>Weight: {loadInfo?.load.weight}</p>
+        <p>
+          Driver: {driverInfo?.driver.name ?? "not sign"}{" "}
+          {driverInfo?.driver.lastName ?? "not sign"}
+        </p>
+        <p>Truck: {driverInfo?.driver.truckNumber ?? "not sign"}</p>
+        <p>Trailer: {driverInfo?.driver.trailerNumber ?? "not sign"}</p>
+        <p>Counted given loads: {loadInfo?.givenCount ?? "not sign"}</p>
+        <p>
+          <Link to="/load">Go back to list</Link>
+        </p>
+      </div>
     </>
   );
 };

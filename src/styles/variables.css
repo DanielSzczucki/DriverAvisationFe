@@ -13,8 +13,6 @@
   --color-text-light: hsl(var(--color-base-hue), 100%, 87%);
 
   --color-text-contrast: hsl(calc(var(--color-base-hue) / 4), 100%, 75%);
-
-  --h1-font-size: font-size: 3rem;
 }
 
 /* rgba(var(--color-base-hue), 80, 206, 0.18); */
@@ -25,8 +23,6 @@
   margin: 0;
 }
 
-
-
 .box {
   background-color: var(--color-background-dark);
   display: flex;
@@ -36,10 +32,20 @@
   color: var(--color-text-light);
 }
 
+.good-box,
+.error-box {
+  background-color: rgb(70, 244, 70, 18%);
+  border-radius: 10px;
+}
+
+.error-box {
+  background-color: rgba(241, 46, 46, 0.18);
+}
+
 .glass {
   background: var(--color-background-light);
   border-radius: 10px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(9px);
   -webkit-backdrop-filter: blur(9px);
+  backdrop-filter: blur(9px);
 }

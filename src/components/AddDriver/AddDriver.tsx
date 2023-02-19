@@ -68,14 +68,10 @@ export const AddDriver = () => {
   if (resultInfo !== null) {
     return (
       <>
-        <>
-          <div>
-            <p>
-              <strong>{resultInfo}</strong>
-            </p>
-            <p>Thank you. Please wait in your truck</p>
-          </div>
-        </>
+        <div className="good-box">
+          <p>{resultInfo}</p>
+          <p>Thank you. Please wait in your truck</p>
+        </div>
       </>
     );
   }

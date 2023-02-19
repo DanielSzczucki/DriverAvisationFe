@@ -16,12 +16,12 @@ export const DriverTableRow = (props: Props) => {
         <td>
           <Link to={`/driver/${props.driver.id}`}>{props.driver.name}</Link>
         </td>
-        <td>{props.driver.lastName}</td>
+        {/* <td>{props.driver.lastName}</td> */}
         <td>{props.driver.referenceNumber}</td>
-        <td>{props.driver.companyName}</td>
+        {/* <td>{props.driver.companyName}</td> */}
         <td>{props.driver.truckNumber}</td>
         <td>{props.driver.trailerNumber}</td>
-        <td>{props.driver.loadingUnloading}</td>
+        {/* <td>{props.driver.loadingUnloading}</td> */}
         <td>{props.driver.loadId}</td>
       </tr>
     </>

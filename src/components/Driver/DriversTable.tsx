@@ -14,16 +14,13 @@ export const DriversTable = (props: Props) => {
   console.log(props);
   return (
     <>
-      <table className="Table">
+      <table className="table">
         <thead>
           <tr>
             <th> Driver name </th>
-            <th> Last name</th>
             <th> Reference </th>
-            <th> Company </th>
             <th> Truck No.</th>
             <th> Trailer No. </th>
-            <th> Statusg </th>
             <th> Load id </th>
           </tr>
         </thead>

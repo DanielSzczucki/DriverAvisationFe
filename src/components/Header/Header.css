@@ -3,7 +3,7 @@
 .header {
   max-width: 1200px;
   width: 96%;
-  height: 10vh;
+  min-height: 10vh;
   margin: 2% auto;
   padding: 1% 2%;
   font-size: 1.2rem;

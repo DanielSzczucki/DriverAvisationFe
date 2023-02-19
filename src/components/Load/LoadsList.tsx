@@ -25,8 +25,10 @@ export const LoadsList = () => {
 
   return (
     <>
-      <h2>Loads</h2>
-      <LoadsTable loads={loadsList} onLoadsChange={refreshLoadsList} />
+      <div className="box glass">
+        <h2>Loads</h2>
+        <LoadsTable loads={loadsList} onLoadsChange={refreshLoadsList} />
+      </div>
     </>
   );
 };

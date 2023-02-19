@@ -25,7 +25,7 @@ export const DriverList = () => {
   }
 
   return (
-    <div className="box glass table">
+    <div className="box glass ">
       <h2>Drivers</h2>
       <DriversTable driversList={data?.driverList} loadsList={data.loadList} />
     </div>

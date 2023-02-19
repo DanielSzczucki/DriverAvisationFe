@@ -3,6 +3,8 @@ import { GetSingleLoadRes, ListDriverRes, SingleDriverRes } from "types";
 
 import { Link, useParams } from "react-router-dom";
 
+import "./Views.css";
+
 export const SingleDriverView = () => {
   const [driverInfo, setDriverInfo] = useState<SingleDriverRes | null>(null);
 
@@ -18,7 +20,6 @@ export const SingleDriverView = () => {
 
       const driverData = await driverRes.json();
       setDriverInfo(driverData);
-      console.log(driverData);
     })();
   }, []);
 
@@ -38,21 +39,23 @@ export const SingleDriverView = () => {
 
   return (
     <>
-      <h2>{driverInfo?.driver.name}</h2>
-      <p>
-        Driver: {driverInfo?.driver.name} {driverInfo?.driver.lastName}
-      </p>
-      <p>Driver Id: {driverInfo?.driver.loadId}</p>
-      <p>Ref: {driverInfo?.driver.referenceNumber}</p>
-      <p>Company: {driverInfo.driver.companyName}</p>
-      <p>Phone: {driverInfo?.driver.phoneNumber}</p>
-      <p>Truck: {driverInfo?.driver.truckNumber}</p>
-      <p>Trailer: {driverInfo?.driver.trailerNumber}</p>
-      <p>Load Name: {loadInfo?.load.loadName ?? "not sign"}</p>
-      <p>Counted given loads: {loadInfo?.givenCount ?? "not sign"}</p>
-      <p>
-        <Link to="/driver">Go back to list</Link>
-      </p>
+      <div className="glass Views">
+        <h2>{driverInfo?.driver.name}</h2>
+        <p>
+          Driver: {driverInfo?.driver.name} {driverInfo?.driver.lastName}
+        </p>
+        <p>Driver Id: {driverInfo?.driver.loadId}</p>
+        <p>Ref: {driverInfo?.driver.referenceNumber}</p>
+        <p>Company: {driverInfo.driver.companyName}</p>
+        <p>Phone: {driverInfo?.driver.phoneNumber}</p>
+        <p>Truck: {driverInfo?.driver.truckNumber}</p>
+        <p>Trailer: {driverInfo?.driver.trailerNumber}</p>
+        <p>Load Name: {loadInfo?.load.loadName ?? "not sign"}</p>
+        <p>Counted given loads: {loadInfo?.givenCount ?? "not sign"}</p>
+        <p>
+          <Link to="/driver">Go back to list</Link>
+        </p>
+      </div>
     </>
   );
 };

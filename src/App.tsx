@@ -15,15 +15,16 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<AddDriver />}></Route>
-        <Route path="/load" element={<LoadsList />}></Route>
-
-        <Route path="/load/:singleLoadId" element={<SingleLoadView />}></Route>
         <Route path="/driver" element={<DriverList />}></Route>
         <Route path="/driver/add" element={<AddDriver />}></Route>
         <Route
           path="/driver/:singleDriverId"
           element={<SingleDriverView />}
         ></Route>
+
+        <Route path="/load" element={<LoadsList />}></Route>
+
+        <Route path="/load/:singleLoadId" element={<SingleLoadView />}></Route>
       </Routes>
     </div>
   );
