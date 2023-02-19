@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { DriverEntity, ListDriverRes, LoadEntity } from "types";
 import { SpinnerLoading } from "../common/SpinnerLoading/SpinnerLoading";
 import { DriversTable } from "./DriversTable";
@@ -25,9 +25,19 @@ export const DriverList = () => {
   }
 
   return (
-    <div className="box glass ">
-      <h2>Drivers</h2>
-      <DriversTable driversList={data?.driverList} loadsList={data.loadList} />
-    </div>
+    <>
+      <div className="section-head">
+        <h2>Drivers</h2>
+        <p>
+          <Link to="/driver/add">➕Add</Link>
+        </p>
+      </div>
+      <div className="box glass ">
+        <DriversTable
+          driversList={data?.driverList}
+          loadsList={data.loadList}
+        />
+      </div>
+    </>
   );
 };

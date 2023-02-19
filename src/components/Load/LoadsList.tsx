@@ -2,6 +2,7 @@ import Reacr, { useEffect, useState } from "react";
 import { LoadEntity } from "types";
 import { SpinnerLoading } from "../common/SpinnerLoading/SpinnerLoading";
 import { LoadsTable } from "./LoadsTable";
+import { Link } from "react-router-dom";
 
 export const LoadsList = () => {
   const [loadsList, setLoadsList] = useState<LoadEntity[] | null>(null);
@@ -25,8 +26,13 @@ export const LoadsList = () => {
 
   return (
     <>
-      <div className="box glass">
+      <div className="section-head">
         <h2>Loads</h2>
+        <p>
+          <Link to="/load/add">➕Add</Link>
+        </p>
+      </div>
+      <div className="box glass">
         <LoadsTable loads={loadsList} onLoadsChange={refreshLoadsList} />
       </div>
     </>

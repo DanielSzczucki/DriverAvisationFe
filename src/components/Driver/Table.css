@@ -1,5 +1,27 @@
 @import "../../styles/variables.css";
 
+.section-head {
+  width: 96%;
+  display: flex;
+  justify-content: space-evenly;
+  padding-bottom: 2%;
+  align-items: center;
+}
+
+.section-head p {
+  text-align: center;
+  padding: 1%;
+  background-color: var(--color-background-light);
+  border-radius: 10px;
+}
+
+.section-head a {
+  list-style: none;
+  text-decoration: none;
+  margin-left: 2%;
+  color: var(--color-text-light);
+}
+
 .table {
   width: 96vw;
   max-width: 1200px;
