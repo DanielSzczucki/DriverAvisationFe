@@ -1,6 +1,8 @@
 @import "../../styles/variables.css";
 
 .header {
+  display: flex;
+
   max-width: 1200px;
   width: 96%;
   min-height: 10vh;

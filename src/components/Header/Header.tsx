@@ -6,13 +6,13 @@ import { Link } from "react-router-dom";
 
 export const Header = () => {
   return (
-    <div className="header glass">
+    <div className="header glass section-head">
       <h1>Carg management app</h1>
       <p>
-        <Link to="/load">Loads 📦</Link>
+        <Link to="/load">Loads</Link>
       </p>
       <p>
-        <Link to="/driver">Drivers 🚚</Link>
+        <Link to="/driver">Drivers </Link>
       </p>
     </div>
   );
