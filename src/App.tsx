@@ -11,7 +11,7 @@ import { SingleDriverView } from "./components/views/SingleDriverView";
 
 function App() {
   return (
-    <div className="App box">
+    <div className="App-box">
       <Header />
       <Routes>
         <Route path="/" element={<AddDriver />}></Route>

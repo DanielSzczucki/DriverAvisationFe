@@ -82,7 +82,7 @@ export const AddDriver = () => {
 
   return (
     <>
-      <form className="box " onSubmit={sendForm}>
+      <form className=" box-size glass addForm" onSubmit={sendForm}>
         <h2>Driver registration</h2>
         <br />
         <label>
@@ -149,8 +149,8 @@ export const AddDriver = () => {
           />
         </label>
         <br />
-        <label>
-          Loading/Unloading: <br />
+        <label className="loadLabel">
+          Loading/Unloading:
           <select
             value={form.loadingUnloading}
             onChange={(e) => updateForm("loadingUnloading", e.target.value)}

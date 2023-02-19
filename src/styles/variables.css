@@ -5,10 +5,21 @@
     var(--color-base-hue) - var(--color-danger-hue-offset)
   );
 
-  --color-background-dark: hsl(var(--color-base-hue), 100%, 8%);
-  --color-background-light: hsl(var(--color-base-hue), 100%, 16%);
+  --color-background-dark: hsl(var(--color-base-hue), 100%, 5%);
+  --color-background-middle: hsl(var(--color-base-hue), 65%, 22%, 70%);
+
+  --color-background-light: hsl(var(--color-base-hue), 100%, 12%, 40%);
+
   --color-text-light: hsl(var(--color-base-hue), 100%, 87%);
+
+  --color-text-contrast: hsl(calc(var(--color-base-hue) / 4), 100%, 75%);
+
+  --h1-font-size: font-size: 3rem;
 }
+
+/* rgba(var(--color-base-hue), 80, 206, 0.18); */
+
+
 
 .box {
   background-color: var(--color-background-dark);
@@ -16,11 +27,13 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: var(--color-text-light);
-  border: 2px solid red;
+}
+
+.glass {
+  background: var(--color-background-light);
   border-radius: 10px;
-  padding: 2%;
-  width: 90%;
-  margin: 2%;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(9px);
 }
