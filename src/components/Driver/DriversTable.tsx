@@ -18,10 +18,9 @@ export const DriversTable = (props: Props) => {
         <thead>
           <tr>
             <th> Driver name </th>
+            <th> Last name</th>
             <th> Reference </th>
             <th> Company </th>
-            <th> Name </th>
-            <th> Last name</th>
             <th> Truck No.</th>
             <th> Trailer No. </th>
             <th> Statusg </th>
