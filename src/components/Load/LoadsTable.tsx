@@ -8,10 +8,9 @@ interface Props {
 }
 
 export const LoadsTable = (props: Props) => {
-  console.log(props);
   return (
     <>
-      <table>
+      <table className="table">
         <thead>
           <tr>
             <th> Load name </th>

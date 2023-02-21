@@ -1,0 +1,96 @@
+@import "../../styles/variables.css";
+
+.section-head {
+  width: 96%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  padding-bottom: 2%;
+  align-items: center;
+}
+
+.section-head p {
+  text-align: center;
+  padding: 1%;
+  margin: 1%;
+  background-color: var(--color-background-light);
+  border-radius: 10px;
+}
+
+.section-head p:hover {
+  background-color: var(--color-background-middle);
+}
+
+.section-head a {
+  list-style: none;
+  text-decoration: none;
+  margin-left: 2%;
+  color: var(--color-text-light);
+}
+
+.table {
+  width: 96vw;
+  max-width: 1200px;
+  text-transform: uppercase;
+}
+
+.table h2 {
+  /* font-size: 90%; */
+  padding: 2%;
+}
+
+.table a {
+  text-decoration: none;
+  list-style: none;
+  background-color: var(--color-background-light);
+  border-radius: 10px;
+  padding: 2% 4%;
+  font-weight: 500;
+  color: var(--color-text-light);
+}
+
+.table a:hover {
+  background-color: gray;
+  padding: 4% 8%;
+  color: var(--color-text-contrast);
+}
+
+th {
+  width: auto;
+  padding: 0.5%;
+  font-size: 1rem;
+  text-align: center;
+  color: var(--color-text-contrast);
+}
+
+tr {
+  width: auto;
+  font-size: 1rem;
+  text-align: center;
+  color: var(--color-text-light);
+  border: 1px solid red;
+}
+
+tr:nth-child(even) {
+  background-color: var(--color-background-light);
+}
+
+td {
+  padding: 1%;
+  font-size: 0.9rem;
+}
+
+td:first-child {
+  color: var(--color-text-contrast);
+}
+
+@media (max-width: 480px) {
+  .table h2 {
+    font-size: 1rem;
+  }
+
+  th,
+  td {
+    font-size: 0.7rem;
+  }
+}

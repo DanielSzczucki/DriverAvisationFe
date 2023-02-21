@@ -1,6 +1,7 @@
 import React, { FormEvent, useState } from "react";
 import { CreateDriverReq, CreateLoadReq, DriverEntity } from "types";
 import { SpinnerLoading } from "../common/SpinnerLoading/SpinnerLoading";
+import "./AddDriver.css";
 
 export const AddDriver = () => {
   const [form, setForm] = useState<CreateDriverReq>({
@@ -9,6 +10,7 @@ export const AddDriver = () => {
     companyName: "",
     phoneNumber: 0,
     referenceNumber: "",
+    companyName: "",
     truckNumber: "",
     trailerNumber: "",
     loadingUnloading: "",
@@ -30,6 +32,8 @@ export const AddDriver = () => {
     setLoading(true);
 
     try {
+      console.log(form);
+
       const res = await fetch("http://localhost:3001/driver", {
         method: "POST",
         headers: {
@@ -65,21 +69,17 @@ export const AddDriver = () => {
   if (resultInfo !== null) {
     return (
       <>
-        <>
-          <div>
-            <p>
-              <strong>{resultInfo}</strong>
-            </p>
-            <p>Thank you. Please wait in your truck</p>
-          </div>
-        </>
+        <div className="good-box">
+          <p>{resultInfo}</p>
+          <p>Thank you. Please wait in your truck</p>
+        </div>
       </>
     );
   }
 
   return (
     <>
-      <form onSubmit={sendForm}>
+      <form className=" box-size glass addForm" onSubmit={sendForm}>
         <h2>Driver registration</h2>
         <br />
         <label>
@@ -115,6 +115,16 @@ export const AddDriver = () => {
             type="text"
             value={form.referenceNumber}
             onChange={(e) => updateForm("referenceNumber", e.target.value)}
+            required
+          />
+        </label>
+        <br />
+        <label>
+          Your Company Name: <br />
+          <input
+            type="text"
+            value={form.companyName}
+            onChange={(e) => updateForm("companyName", e.target.value)}
           />
         </label>
         <br />
@@ -136,12 +146,13 @@ export const AddDriver = () => {
           />
         </label>
         <br />
-        <label>
-          Loading/Unloading: <br />
+        <label className="loadLabel">
+          Loading/Unloading:
           <select
             value={form.loadingUnloading}
             onChange={(e) => updateForm("loadingUnloading", e.target.value)}
           >
+            <option>select</option>
             <option>loading</option>
             <option>unloading</option>
           </select>

@@ -1,0 +1,51 @@
+:root {
+  --color-base-hue: 200;
+  --color-danger-hue-offset: 180;
+  --color-danger-hue: calc(
+    var(--color-base-hue) - var(--color-danger-hue-offset)
+  );
+
+  --color-background-dark: hsl(var(--color-base-hue), 100%, 5%);
+  --color-background-middle: hsl(var(--color-base-hue), 65%, 22%, 70%);
+
+  --color-background-light: hsl(var(--color-base-hue), 100%, 12%, 40%);
+
+  --color-text-light: hsl(var(--color-base-hue), 100%, 87%);
+
+  --color-text-contrast: hsl(calc(var(--color-base-hue) / 4), 100%, 75%);
+}
+
+/* rgba(var(--color-base-hue), 80, 206, 0.18); */
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.box {
+  background-color: var(--color-background-dark);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-light);
+}
+
+.good-box,
+.error-box {
+  background-color: rgb(70, 244, 70, 18%);
+  border-radius: 10px;
+}
+
+.error-box {
+  background-color: rgba(241, 46, 46, 0.18);
+}
+
+.glass {
+  background: var(--color-background-light);
+  border-radius: 10px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  -webkit-backdrop-filter: blur(9px);
+  backdrop-filter: blur(9px);
+}

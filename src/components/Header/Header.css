@@ -1,0 +1,17 @@
+@import "../../styles/variables.css";
+
+.header {
+  display: flex;
+
+  max-width: 1200px;
+  width: 96%;
+  min-height: 10vh;
+  margin: 2% auto;
+  padding: 1% 2%;
+  font-size: 1.2rem;
+}
+
+.header h1 {
+  padding: 0;
+  margin: 0;
+}
