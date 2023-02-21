@@ -1,16 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { GetSingleLoadRes, ListDriverRes, SingleDriverRes } from "types";
+import {
+  DriverEntity,
+  GetSingleDriverRes,
+  GetSingleLoadRes,
+  ListDriverRes,
+} from "types";
 
 import { Link, useParams } from "react-router-dom";
 
 import "./Views.css";
 
 export const SingleDriverView = () => {
-  const [driverInfo, setDriverInfo] = useState<SingleDriverRes | null>(null);
+  const [driverInfo, setDriverInfo] = useState<GetSingleDriverRes | null>(null);
 
   const { singleDriverId } = useParams();
 
   const [loadInfo, setLoadInfo] = useState<GetSingleLoadRes | null>(null);
+
+  console.log(singleDriverId);
 
   useEffect(() => {
     (async () => {
@@ -19,6 +26,8 @@ export const SingleDriverView = () => {
       );
 
       const driverData = await driverRes.json();
+      console.log(driverData);
+
       setDriverInfo(driverData);
     })();
   }, []);
@@ -44,7 +53,7 @@ export const SingleDriverView = () => {
         <p>
           Driver: {driverInfo?.driver.name} {driverInfo?.driver.lastName}
         </p>
-        <p>Driver Id: {driverInfo?.driver.loadId}</p>
+        <p>Driver Id: {driverInfo?.driver.id}</p>
         <p>Ref: {driverInfo?.driver.referenceNumber}</p>
         <p>Company: {driverInfo.driver.companyName}</p>
         <p>Phone: {driverInfo?.driver.phoneNumber}</p>

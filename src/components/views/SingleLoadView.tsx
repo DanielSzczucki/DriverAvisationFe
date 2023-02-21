@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
 import {
   CreateLoadReq,
+  DriverEntity,
   GetSingleLoadRes,
   LoadEntity,
-  SingleDriverRes,
 } from "types";
 
 import { Link, useParams } from "react-router-dom";
-import { logDOM } from "@testing-library/react";
 
 export const SingleLoadView = () => {
   const [loadInfo, setLoadInfo] = useState<GetSingleLoadRes | null>(null);
-  const [driverInfo, setDriverInfo] = useState<SingleDriverRes | null>(null);
+  const [driverInfo, setDriverInfo] = useState<DriverEntity | null>(null);
   const { singleLoadId } = useParams();
 
   useEffect(() => {
@@ -53,11 +52,11 @@ export const SingleLoadView = () => {
         <p>Quantity: {loadInfo?.load.quantity}</p>
         <p>Weight: {loadInfo?.load.weight}</p>
         <p>
-          Driver: {driverInfo?.driver.name ?? "not sign"}{" "}
-          {driverInfo?.driver.lastName ?? "not sign"}
+          Driver: {driverInfo?.name ?? "not sign"}{" "}
+          {driverInfo?.lastName ?? "not sign"}
         </p>
-        <p>Truck: {driverInfo?.driver.truckNumber ?? "not sign"}</p>
-        <p>Trailer: {driverInfo?.driver.trailerNumber ?? "not sign"}</p>
+        <p>Truck: {driverInfo?.truckNumber ?? "not sign"}</p>
+        <p>Trailer: {driverInfo?.trailerNumber ?? "not sign"}</p>
         <p>Counted given loads: {loadInfo?.givenCount ?? "not sign"}</p>
         <p>
           <Link to="/load">Go back to list</Link>
