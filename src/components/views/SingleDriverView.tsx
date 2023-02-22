@@ -1,3 +1,5 @@
+//@TODO sprawdz commity i wróć do commita z przed merga.. właściwie to nie wracaj bo teraz zasysa dane z obu miejsc. sprawdż tylko songl load view
+
 import React, { useEffect, useState } from "react";
 import {
   DriverEntity,
@@ -9,15 +11,12 @@ import {
 import { Link, useParams } from "react-router-dom";
 
 import "./Views.css";
+import { parseJsonSourceFileConfigFileContent } from "typescript";
 
 export const SingleDriverView = () => {
-  const [driverInfo, setDriverInfo] = useState<GetSingleDriverRes | null>(null);
-
   const { singleDriverId } = useParams();
-
+  const [driverInfo, setDriverInfo] = useState<GetSingleDriverRes | null>(null);
   const [loadInfo, setLoadInfo] = useState<GetSingleLoadRes | null>(null);
-
-  console.log(singleDriverId);
 
   useEffect(() => {
     (async () => {
@@ -26,7 +25,6 @@ export const SingleDriverView = () => {
       );
 
       const driverData = await driverRes.json();
-      console.log(driverData);
 
       setDriverInfo(driverData);
     })();
