@@ -43,19 +43,6 @@ export const AddDriver = () => {
       const data: DriverEntity = await res.json();
       setLoading(false);
       setResultInfo(`${data.name} added with ref: ${data.referenceNumber}`);
-
-      // setTimeout(() => {
-      //   setResultInfo(null);
-      //   setForm({
-      //     name: "",
-      //     lastName: "",
-      //     phoneNumber: 0,
-      //     referenceNumber: "",
-      //     truckNumber: "",
-      //     trailerNumber: "",
-      //     loadingUnloading: "unloadning",
-      //   });
-      // }, 2000);
     } finally {
       setLoading(false);
     }

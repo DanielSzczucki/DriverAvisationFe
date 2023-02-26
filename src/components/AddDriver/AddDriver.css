@@ -2,7 +2,7 @@
 
 .addForm,
 .good-box {
-  max-width: 800px;
+  max-width: 1200px;
   width: 96%;
   margin: 0% auto;
   padding: 4%;
@@ -14,7 +14,6 @@
 }
 
 .addFrom label {
-  display: block;
   font-weight: bold;
 }
 
