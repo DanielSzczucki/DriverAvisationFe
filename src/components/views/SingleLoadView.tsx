@@ -5,17 +5,25 @@ import {
   GetSingleLoadRes,
   LoadEntity,
 } from "types";
-
+import { useAuthHeader } from "react-auth-kit";
 import { Link, useParams } from "react-router-dom";
 
 export const SingleLoadView = () => {
   const [loadInfo, setLoadInfo] = useState<GetSingleLoadRes | null>(null);
   const [driverInfo, setDriverInfo] = useState<DriverEntity | null>(null);
   const { singleLoadId } = useParams();
+  const authToken = useAuthHeader();
 
   useEffect(() => {
     (async () => {
-      const loadRes = await fetch(`http://localhost:3001/load/${singleLoadId}`);
+      const loadRes = await fetch(
+        `http://localhost:3001/load/${singleLoadId}`,
+        {
+          headers: {
+            Authorization: `${authToken()}`,
+          },
+        }
+      );
       const loadData = await loadRes.json();
 
       setLoadInfo(loadData);
@@ -68,3 +76,4 @@ export const SingleLoadView = () => {
 
 //@TODO - add delete option
 //add new Load option
+// @TODO take and save data to one container and find better hook: useMemo?

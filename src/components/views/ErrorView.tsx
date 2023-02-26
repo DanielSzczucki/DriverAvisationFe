@@ -5,7 +5,7 @@ export const ErrorView = () => {
         <p>You went to far away 😕</p>
         <p>Sorry, please try again later</p>
         <p>
-          <a href="/loads">Back to list</a>
+          <a href="/">Back to list</a>
         </p>
       </div>
     </>

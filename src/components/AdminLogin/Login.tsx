@@ -21,7 +21,6 @@ export const Login = (props: any) => {
       });
 
       const data = await res.json();
-      console.log(data);
 
       //sending cookie annd other
       //make auth
@@ -29,9 +28,12 @@ export const Login = (props: any) => {
         token: data.token,
         expiresIn: 3600,
         tokenType: "Bearer",
-        //info ab user
+        //info user
         authState: { email: values.email },
       });
+
+      console.log(data);
+
       navigate("/driver");
     } catch (err) {
       console.log(err);

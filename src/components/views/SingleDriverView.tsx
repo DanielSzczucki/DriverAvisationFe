@@ -7,21 +7,26 @@ import {
   GetSingleLoadRes,
   ListDriverRes,
 } from "types";
-
 import { Link, useParams } from "react-router-dom";
+import { useAuthHeader } from "react-auth-kit";
 
 import "./Views.css";
-import { parseJsonSourceFileConfigFileContent } from "typescript";
 
 export const SingleDriverView = () => {
   const { singleDriverId } = useParams();
   const [driverInfo, setDriverInfo] = useState<GetSingleDriverRes | null>(null);
   const [loadInfo, setLoadInfo] = useState<GetSingleLoadRes | null>(null);
+  const authToken = useAuthHeader();
 
   useEffect(() => {
     (async () => {
       const driverRes = await fetch(
-        `http://localhost:3001/driver/${singleDriverId}`
+        `http://localhost:3001/driver/${singleDriverId}`,
+        {
+          headers: {
+            Authorization: `${authToken()}`,
+          },
+        }
       );
 
       const driverData = await driverRes.json();
@@ -33,7 +38,12 @@ export const SingleDriverView = () => {
   useEffect(() => {
     (async () => {
       const loadRes = await fetch(
-        `http://localhost:3001/load/${driverInfo?.driver.loadId}`
+        `http://localhost:3001/load/${driverInfo?.driver.loadId}`,
+        {
+          headers: {
+            Authorization: `${authToken()}`,
+          },
+        }
       );
       const loadData = await loadRes.json();
       setLoadInfo(loadData);
@@ -69,3 +79,4 @@ export const SingleDriverView = () => {
 
 //@TODO - add delete option
 //add new Load option
+//@TODO - add math couting for pallets
