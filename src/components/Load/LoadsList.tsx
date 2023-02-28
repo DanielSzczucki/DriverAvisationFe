@@ -17,6 +17,7 @@ export const LoadsList = () => {
         },
       });
       const data = await res.json();
+      console.log("Token", authToken);
 
       setLoadsList(data.loadList);
     })();

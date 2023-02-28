@@ -22,11 +22,13 @@ export const Login = (props: any) => {
 
       const data = await res.json();
 
-      //sending cookie annd other
-      //make auth
+      // sending cookie annd other
+      // make auth
       signIn({
-        token: data.token,
-        expiresIn: 3600,
+        token: data.accesToken,
+        refreshToken: data.refreshToken,
+        refreshTokenExpireIn: 5,
+        expiresIn: 5 * 60,
         tokenType: "Bearer",
         //info user
         authState: { email: values.email },
@@ -57,7 +59,7 @@ export const Login = (props: any) => {
             <input
               type="email"
               name="email"
-              autoComplete="username"
+              autoComplete="on"
               placeholder="login/mail"
               onChange={formik.handleChange}
             />
@@ -68,7 +70,7 @@ export const Login = (props: any) => {
             <input
               type="password"
               name="password"
-              autoComplete="current-password"
+              autoComplete="on"
               placeholder="password"
               onChange={formik.handleChange}
             />
