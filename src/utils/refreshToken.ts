@@ -15,6 +15,7 @@ export const refreshApi = createRefresh({
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          // Authorization: `${refreshToken}`,
         },
         body: JSON.stringify({
           refreshToken: refreshToken,
@@ -22,7 +23,7 @@ export const refreshApi = createRefresh({
         }),
       });
       const data = await response.json();
-      console.log(data);
+      console.log("refresh data", data);
 
       return {
         isSuccess: true,

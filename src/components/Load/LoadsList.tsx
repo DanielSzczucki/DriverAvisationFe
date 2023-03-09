@@ -12,12 +12,14 @@ export const LoadsList = () => {
   const refreshLoadsList = () => {
     (async () => {
       const res = await fetch("http://localhost:3001/load", {
+        credentials: "include",
         headers: {
+          "Content-Type": "application/json",
           Authorization: `${authToken()}`,
         },
       });
       const data = await res.json();
-      console.log("Token", authToken);
+      console.log("Token", authToken());
 
       setLoadsList(data.loadList);
     })();

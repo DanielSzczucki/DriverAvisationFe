@@ -4,6 +4,7 @@ import "./App.css";
 import { AddDriver } from "./components/AddDriver/AddDriver";
 import { Header } from "./components/Header/Header";
 import { Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./utils/auth";
 import { SingleLoadView } from "./components/views/SingleLoadView";
 import { LoadsList } from "./components/Load/LoadsList";
 import { DriverList } from "./components/Driver/DriversList";
@@ -16,48 +17,26 @@ function App() {
   return (
     <div className="App-box">
       <Header />
-      <Routes>
-        <Route path="/" element={<Login />}></Route>
-        <Route path="/driver/add" element={<AddDriver />}></Route>
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<Login />}></Route>
+          <Route path="/driver/add" element={<AddDriver />}></Route>
+          <Route path="/driver" element={<DriverList />}></Route>
+          <Route
+            path="/driver/:singleDriverId"
+            element={<SingleDriverView />}
+          ></Route>
 
-        <Route
-          path="/driver"
-          element={
-            <RequireAuth loginPath="/">
-              <DriverList />
-            </RequireAuth>
-          }
-        ></Route>
+          <Route path="/load" element={<LoadsList />}></Route>
 
-        <Route
-          path="/driver/:singleDriverId"
-          element={
-            <RequireAuth loginPath="/">
-              <SingleDriverView />
-            </RequireAuth>
-          }
-        ></Route>
+          <Route
+            path="/load/:singleLoadId"
+            element={<SingleLoadView />}
+          ></Route>
 
-        <Route
-          path="/load"
-          element={
-            <RequireAuth loginPath="/">
-              <LoadsList />
-            </RequireAuth>
-          }
-        ></Route>
-
-        <Route
-          path="/load/:singleLoadId"
-          element={
-            <RequireAuth loginPath="/">
-              <SingleLoadView />
-            </RequireAuth>
-          }
-        ></Route>
-
-        <Route path="*" element={<ErrorView />} />
-      </Routes>
+          <Route path="*" element={<ErrorView />} />
+        </Routes>
+      </AuthProvider>
     </div>
   );
 }

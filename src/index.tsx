@@ -4,10 +4,9 @@ import { AuthProvider } from "react-auth-kit";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { refreshApi } from "./utils/refreshToken";
-
 import App from "./App";
+
 import "./index.css";
-import { create } from "domain";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

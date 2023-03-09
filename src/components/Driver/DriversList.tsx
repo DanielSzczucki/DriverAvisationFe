@@ -13,6 +13,7 @@ export const DriverList = () => {
 
   const refreshList = async () => {
     const driverrRes = await fetch("http://localhost:3001/driver", {
+      credentials: "include",
       headers: {
         Authorization: `${authToken()}`,
         "Content-Type": "application/json",
