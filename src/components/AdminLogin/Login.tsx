@@ -68,6 +68,7 @@ export const Login = (props: any) => {
               name="email"
               autoComplete="on"
               placeholder="login/mail"
+              required
               onChange={formik.handleChange}
             />
           </label>
@@ -79,6 +80,7 @@ export const Login = (props: any) => {
               name="password"
               autoComplete="on"
               placeholder="password"
+              required
               onChange={formik.handleChange}
             />
           </label>

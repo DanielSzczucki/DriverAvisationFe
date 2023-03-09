@@ -1,11 +1,12 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
-import { useSignOut } from "react-auth-kit";
+import { useSignOut, useIsAuthenticated } from "react-auth-kit";
 
 import "./Header.css";
 
 export const Header = () => {
   const signOut = useSignOut();
+  const isAuth = useIsAuthenticated();
 
   //@TODO - this needs to be fixed, auth model needs to be changed
   const logout = async () => {
@@ -29,20 +30,27 @@ export const Header = () => {
   };
 
   return (
-    <div className="header glass section-head">
-      <h1>Carg management app</h1>
-      <p>
-        <Link to="/load">Loads</Link>
-      </p>
-      <p>
-        <Link to="/driver">Drivers </Link>
-      </p>
+    <div className="Header glass section-head">
+      <h1>CargMan app</h1>
 
-      <p>
-        <Link to="/" onClick={logout}>
-          Logout
-        </Link>
-      </p>
+      {isAuth() ? (
+        <>
+          <button>
+            <Link to="/load">Loads</Link>
+          </button>
+          <button>
+            <Link to="/driver">Drivers </Link>
+          </button>
+        </>
+      ) : null}
+
+      {isAuth() ? (
+        <button>
+          <Link to="/" onClick={logout}>
+            Logout
+          </Link>
+        </button>
+      ) : null}
     </div>
   );
 };
