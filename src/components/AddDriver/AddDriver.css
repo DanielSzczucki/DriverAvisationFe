@@ -54,3 +54,15 @@
   background: var(--color-background-dark);
   color: var(--color-text-light);
 }
+
+article {
+  border-radius: 10px;
+  overflow: scroll;
+  margin-bottom: 2%;
+  -ms-overflow-style: none;
+  overflow: -moz-scrollbars-none;
+}
+article::-webkit-scrollbar {
+  display: none;
+  -ms-overflow-style: none;
+}
