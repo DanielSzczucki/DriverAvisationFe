@@ -23,7 +23,9 @@ export const SingleDriverView = () => {
       const driverRes = await fetch(
         `http://localhost:3001/driver/${singleDriverId}`,
         {
+          credentials: "include",
           headers: {
+            "Content-Type": "application/json",
             Authorization: `${authToken()}`,
           },
         }
@@ -40,7 +42,9 @@ export const SingleDriverView = () => {
       const loadRes = await fetch(
         `http://localhost:3001/load/${driverInfo?.driver.loadId}`,
         {
+          credentials: "include",
           headers: {
+            "Content-type": "application/json",
             Authorization: `${authToken()}`,
           },
         }

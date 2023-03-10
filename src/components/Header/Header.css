@@ -3,7 +3,6 @@
 .Header {
   display: flex;
   justify-content: space-around;
-
   width: 96%;
   max-width: 1200px;
   min-height: 10vh;
@@ -33,6 +32,4 @@
 .menu {
   display: flex;
   justify-content: space-around;
-
-  align-content: space-between;
 }

@@ -19,7 +19,9 @@ export const SingleLoadView = () => {
       const loadRes = await fetch(
         `http://localhost:3001/load/${singleLoadId}`,
         {
+          credentials: "include",
           headers: {
+            "Content-Type": "application/json",
             Authorization: `${authToken()}`,
           },
         }

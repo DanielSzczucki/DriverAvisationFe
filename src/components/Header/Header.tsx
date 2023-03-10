@@ -30,27 +30,35 @@ export const Header = () => {
   };
 
   return (
-    <div className="Header glass section-head">
+    <div
+      className="Header glass section-head
+  "
+    >
       <h1>CargMan app</h1>
+      <div className="menu">
+        {isAuth() ? (
+          <>
+            <button>
+              <Link to="/load">Loads</Link>
+            </button>
+            <button>
+              <Link to="/driver">Drivers </Link>
+            </button>
+          </>
+        ) : null}
 
-      {isAuth() ? (
-        <>
+        {isAuth() ? (
           <button>
-            <Link to="/load">Loads</Link>
+            <Link to="/" onClick={logout}>
+              Logout
+            </Link>
           </button>
+        ) : (
           <button>
-            <Link to="/driver">Drivers </Link>
+            <Link to="/login">🔑</Link>
           </button>
-        </>
-      ) : null}
-
-      {isAuth() ? (
-        <button>
-          <Link to="/" onClick={logout}>
-            Logout
-          </Link>
-        </button>
-      ) : null}
+        )}
+      </div>
     </div>
   );
 };
