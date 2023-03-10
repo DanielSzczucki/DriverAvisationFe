@@ -35,19 +35,19 @@ export const DriverList = () => {
 
   return (
     <>
-      <div className="section-head">
+      <header className="section-head">
         <h2>Drivers</h2>
 
         <p>
           <Link to="/driver/add">➕Add</Link>
         </p>
-      </div>
-      <div className="box glass ">
+      </header>
+      <section className="box glass ">
         <DriversTable
           driversList={driverData?.driverList}
           loadsList={driverData.loadList}
         />
-      </div>
+      </section>
     </>
   );
 };

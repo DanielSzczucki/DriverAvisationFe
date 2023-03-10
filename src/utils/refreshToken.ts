@@ -11,14 +11,16 @@ export const refreshApi = createRefresh({
     authUserState,
   }) => {
     try {
-      const response = await fetch("http://localhost:3000/refresh", {
+      const response = await fetch("http://localhost:3001/refresh", {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
-          // Authorization: `${refreshToken}`,
+          Authorization: `${authToken}`,
         },
+        //change: token sent, is a temporaty solution, refresh token must be refresh token - change on backend to
         body: JSON.stringify({
-          refreshToken: refreshToken,
+          refreshToken: authToken,
           oldAuthToken: authToken,
         }),
       });
