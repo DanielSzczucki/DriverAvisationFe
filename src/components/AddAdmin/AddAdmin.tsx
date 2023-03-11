@@ -3,10 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSignIn, useSignOut, useAuthHeader } from "react-auth-kit";
 import { useFormik } from "formik";
 
-import "./Login.css";
-
-export const Login = (props: any) => {
-  const signIn = useSignIn();
+export const AddAdmin = (props: any) => {
   const navigate = useNavigate();
   const authToken = useAuthHeader();
 
@@ -14,14 +11,10 @@ export const Login = (props: any) => {
     console.log("Values", values);
 
     try {
-      console.log(authToken());
-
-      const res = await fetch("http://localhost:3001/login", {
+      const res = await fetch("http://localhost:3001/register", {
         method: "POST",
-        credentials: "include",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `${authToken()}`,
         },
         body: JSON.stringify(values),
       });
@@ -29,28 +22,19 @@ export const Login = (props: any) => {
       const data = await res.json();
       console.log("data", data);
 
-      // sending cookie annd other
-      // make auth
-      signIn({
-        token: data.token.refreshToken,
-        refreshToken: data.token.refreshToken,
-        refreshTokenExpireIn: 5,
-        expiresIn: 5 * 60,
-        tokenType: "Bearer",
-        //info user
-        authState: { email: values.email },
-      });
-
       console.log(data);
 
-      navigate("/driver");
+      navigate("/login");
     } catch (err) {
       console.log(err);
     }
   };
 
+  //Todo add conditional rendering and message after user created
+
   const formik = useFormik({
     initialValues: {
+      name: "",
       email: "",
       password: "",
     },
@@ -59,8 +43,23 @@ export const Login = (props: any) => {
 
   return (
     <>
+      <header className="section-head">
+        <h2>User registration form</h2>
+      </header>
       <div className="box glass addForm">
         <form onSubmit={formik.handleSubmit}>
+          <label>
+            Name <br />
+            <input
+              type="name"
+              name="name"
+              autoComplete="on"
+              placeholder="name"
+              required
+              onChange={formik.handleChange}
+            />
+          </label>
+          <br />
           <label>
             Login <br />
             <input
@@ -85,7 +84,7 @@ export const Login = (props: any) => {
             />
           </label>
 
-          <button type="submit">Login</button>
+          <button type="submit">Register</button>
         </form>
         <p>
           <Link to="/driver/add">Driver registration</Link>

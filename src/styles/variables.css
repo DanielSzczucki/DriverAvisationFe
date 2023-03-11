@@ -52,3 +52,9 @@
   -webkit-backdrop-filter: blur(9px);
   backdrop-filter: blur(9px);
 }
+
+.hide-scrollbar {
+  overflow: auto;
+  -ms-overflow-style: none; /* IE 11 */
+  scrollbar-width: none; /* Firefox 64 */
+}

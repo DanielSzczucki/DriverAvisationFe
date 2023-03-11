@@ -66,7 +66,7 @@ export const AddDriver = () => {
 
   return (
     <>
-      <article>
+      <article className="hide-scrollbar">
         <form className=" box-size glass addForm" onSubmit={sendForm}>
           <h2>Driver registration</h2>
           <br />
