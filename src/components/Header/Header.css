@@ -3,6 +3,7 @@
 .Header {
   display: flex;
   justify-content: space-around;
+  align-content: space-around;
   width: 96%;
   min-height: 10vh;
   margin: 1% auto;
