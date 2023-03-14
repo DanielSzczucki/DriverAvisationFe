@@ -31,8 +31,7 @@ export const AddDriver = () => {
     setLoading(true);
 
     try {
-      console.log(form);
-
+      setLoading(true);
       const res = await fetch("http://localhost:3001/driver", {
         method: "POST",
         credentials: "include",
@@ -66,7 +65,7 @@ export const AddDriver = () => {
 
   return (
     <>
-      <article className="hide-scrollbar">
+      <main className="hide-scrollbar">
         <form className=" box-size glass addForm" onSubmit={sendForm}>
           <h2>Driver registration</h2>
           <br />
@@ -148,7 +147,7 @@ export const AddDriver = () => {
           <br />
           <button type="submit">Register</button>
         </form>
-      </article>
+      </main>
     </>
   );
 };

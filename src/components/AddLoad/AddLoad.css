@@ -55,14 +55,14 @@
   color: var(--color-text-light);
 }
 
-main {
+article {
   border-radius: 10px;
   overflow: scroll;
   margin-bottom: 2%;
   -ms-overflow-style: none;
   overflow: -moz-scrollbars-none;
 }
-main::-webkit-scrollbar {
+article::-webkit-scrollbar {
   display: none;
   -ms-overflow-style: none;
 }

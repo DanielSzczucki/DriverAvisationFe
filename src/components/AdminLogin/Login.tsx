@@ -88,7 +88,7 @@ export const Login = (props: any) => {
           <button type="submit">Login</button>
         </form>
         <p>
-          <Link to="/driver/add">Driver registration</Link>
+          <Link to="/register">User registration</Link>
         </p>
       </div>
     </>

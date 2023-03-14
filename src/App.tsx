@@ -12,6 +12,7 @@ import { SingleDriverView } from "./components/views/SingleDriverView";
 import { ErrorView } from "./components/views/ErrorView";
 import { Login } from "./components/AdminLogin/Login";
 import { AddAdmin } from "./components/AddAdmin/AddAdmin";
+import { AddLoad } from "./components/AddLoad/AddLoad";
 
 function App() {
   return (
@@ -20,8 +21,9 @@ function App() {
       <AuthProvider>
         <Routes>
           <Route path="/" element={<AddDriver />}></Route>
-          <Route path="/register" element={<AddAdmin />}></Route>
           <Route path="/login" element={<Login />}></Route>
+          <Route path="/register" element={<AddAdmin />}></Route>
+
           <Route path="/driver" element={<DriverList />}></Route>
           <Route path="/driver/add" element={<AddDriver />}></Route>
           <Route
@@ -30,11 +32,11 @@ function App() {
           ></Route>
 
           <Route path="/load" element={<LoadsList />}></Route>
-
           <Route
             path="/load/:singleLoadId"
             element={<SingleLoadView />}
           ></Route>
+          <Route path="/load/add" element={<AddLoad />}></Route>
 
           <Route path="*" element={<ErrorView />} />
         </Routes>
