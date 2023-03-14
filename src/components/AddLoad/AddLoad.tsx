@@ -8,7 +8,7 @@ export const AddLoad = () => {
     sender: "",
     recipient: "",
     forwarder: "",
-    units: Units.empty,
+    units: Units.other,
     quantity: 0,
     weight: 0,
     driverId: "",
@@ -93,7 +93,6 @@ export const AddLoad = () => {
             value={form.units}
             onChange={(e) => updateForm("units", e.target.value)}
           >
-            <option>{Units[Units.empty]}</option>
             <option>{Units[Units.other]}</option>
             <option>{Units[Units.pallets]}</option>
             <option>{Units[Units.pcs]}</option>

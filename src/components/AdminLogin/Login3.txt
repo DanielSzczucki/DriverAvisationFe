@@ -1,0 +1,63 @@
+import { FormEvent, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
+import { useAuth } from "../../utils/auth";
+
+import "./Login.css";
+
+export const Login = (props: any) => {
+  const [user, setUser] = useState("");
+
+  const auth = useAuth();
+  const navigate = useNavigate();
+
+  const onSubmit = async (values: any) => {
+    console.log("Values", values);
+    auth?.login(values);
+
+    console.log("auth state", auth?.isLoggedIn);
+  };
+
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    onSubmit,
+  });
+
+  return (
+    <>
+      <div className="box glass addForm">
+        <form onSubmit={formik.handleSubmit}>
+          <label>
+            Login <br />
+            <input
+              type="email"
+              name="email"
+              autoComplete="on"
+              placeholder="login/mail"
+              onChange={formik.handleChange}
+            />
+          </label>
+          <br />
+          <label>
+            Password <br />
+            <input
+              type="password"
+              name="password"
+              autoComplete="on"
+              placeholder="password"
+              onChange={formik.handleChange}
+            />
+          </label>
+
+          <button type="submit">Login</button>
+        </form>
+        <p>
+          <Link to="driver/add">Driver registration</Link>
+        </p>
+      </div>
+    </>
+  );
+};

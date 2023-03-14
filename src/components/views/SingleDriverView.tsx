@@ -1,24 +1,38 @@
-import React, { useEffect, useState } from "react";
-import { GetSingleLoadRes, ListDriverRes, SingleDriverRes } from "types";
+//@TODO sprawdz commity i wróć do commita z przed merga.. właściwie to nie wracaj bo teraz zasysa dane z obu miejsc. sprawdż tylko songl load view
 
+import React, { useEffect, useState } from "react";
+import {
+  DriverEntity,
+  GetSingleDriverRes,
+  GetSingleLoadRes,
+  ListDriverRes,
+} from "types";
 import { Link, useParams } from "react-router-dom";
+import { useAuthHeader } from "react-auth-kit";
 
 import "./Views.css";
 
 export const SingleDriverView = () => {
-  const [driverInfo, setDriverInfo] = useState<SingleDriverRes | null>(null);
-
   const { singleDriverId } = useParams();
-
+  const [driverInfo, setDriverInfo] = useState<GetSingleDriverRes | null>(null);
   const [loadInfo, setLoadInfo] = useState<GetSingleLoadRes | null>(null);
+  const authToken = useAuthHeader();
 
   useEffect(() => {
     (async () => {
       const driverRes = await fetch(
-        `http://localhost:3001/driver/${singleDriverId}`
+        `http://localhost:3001/driver/${singleDriverId}`,
+        {
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `${authToken()}`,
+          },
+        }
       );
 
       const driverData = await driverRes.json();
+
       setDriverInfo(driverData);
     })();
   }, []);
@@ -26,7 +40,14 @@ export const SingleDriverView = () => {
   useEffect(() => {
     (async () => {
       const loadRes = await fetch(
-        `http://localhost:3001/load/${driverInfo?.driver.loadId}`
+        `http://localhost:3001/load/${driverInfo?.driver.loadId}`,
+        {
+          credentials: "include",
+          headers: {
+            "Content-type": "application/json",
+            Authorization: `${authToken()}`,
+          },
+        }
       );
       const loadData = await loadRes.json();
       setLoadInfo(loadData);
@@ -44,7 +65,7 @@ export const SingleDriverView = () => {
         <p>
           Driver: {driverInfo?.driver.name} {driverInfo?.driver.lastName}
         </p>
-        <p>Driver Id: {driverInfo?.driver.loadId}</p>
+        <p>Driver Id: {driverInfo?.driver.id}</p>
         <p>Ref: {driverInfo?.driver.referenceNumber}</p>
         <p>Company: {driverInfo.driver.companyName}</p>
         <p>Phone: {driverInfo?.driver.phoneNumber}</p>
@@ -62,3 +83,4 @@ export const SingleDriverView = () => {
 
 //@TODO - add delete option
 //add new Load option
+//@TODO - add math couting for pallets

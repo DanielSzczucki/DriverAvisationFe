@@ -2,7 +2,7 @@
 
 .addForm,
 .good-box {
-  max-width: 800px;
+  max-width: 1200px;
   width: 96%;
   margin: 0% auto;
   padding: 4%;
@@ -14,18 +14,15 @@
 }
 
 .addFrom label {
-  display: block;
   font-weight: bold;
-  margin-top: 2%;
-  margin-bottom: 1%;
 }
 
 .addForm input,
 .addForm textarea,
 .addForm button {
-  width: 96%;
+  width: 100%;
   margin: 2% auto;
-  padding: 1% 2%;
+  padding: 2% 2%;
   font-size: 1.3rem;
   background: var(--color-background-middle);
   border-radius: 10px;
@@ -38,8 +35,8 @@
 
 .addForm button {
   display: block;
-  margin: 0 auto;
-  padding: 1% 4%;
+  margin: 20px auto;
+  padding: 2% 4%;
   width: 100%;
 }
 
@@ -56,4 +53,16 @@
   border-radius: 10px;
   background: var(--color-background-dark);
   color: var(--color-text-light);
+}
+
+article {
+  border-radius: 10px;
+  overflow: scroll;
+  margin-bottom: 2%;
+  -ms-overflow-style: none;
+  overflow: -moz-scrollbars-none;
+}
+article::-webkit-scrollbar {
+  display: none;
+  -ms-overflow-style: none;
 }

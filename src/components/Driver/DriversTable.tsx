@@ -11,7 +11,6 @@ interface Props {
 }
 
 export const DriversTable = (props: Props) => {
-  console.log(props);
   return (
     <>
       <table className="table">
