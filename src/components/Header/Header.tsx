@@ -1,7 +1,5 @@
-import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useSignOut, useIsAuthenticated } from "react-auth-kit";
-
 import "./Header.css";
 
 export const Header = () => {
@@ -24,41 +22,39 @@ export const Header = () => {
     } catch (e) {
       console.error(e);
     }
-
     //clear auth cookies from react-auth-kit
     signOut();
   };
 
   return (
-    <div
-      className="Header glass section-head
-  "
-    >
-      <h1>CargMan app</h1>
-      <div className="menu">
-        {isAuth() ? (
-          <>
-            <button>
-              <Link to="/load">Loads</Link>
-            </button>
-            <button>
-              <Link to="/driver">Drivers </Link>
-            </button>
-          </>
-        ) : null}
+    <>
+      <div className="Header glass section-head">
+        <h1>CargMan app</h1>
+        <div className="menu">
+          {isAuth() ? (
+            <>
+              <button>
+                <Link to="/load">Loads</Link>
+              </button>
+              <button>
+                <Link to="/driver">Drivers </Link>
+              </button>
+            </>
+          ) : null}
 
-        {isAuth() ? (
-          <button>
-            <Link to="/" onClick={logout}>
-              Logout
-            </Link>
-          </button>
-        ) : (
-          <button className="">
-            <Link to="/login">🔑</Link>
-          </button>
-        )}
+          {isAuth() ? (
+            <button>
+              <Link to="/" onClick={logout}>
+                Logout
+              </Link>
+            </button>
+          ) : (
+            <button className="">
+              <Link to="/login">🔑</Link>
+            </button>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };

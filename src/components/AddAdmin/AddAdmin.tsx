@@ -1,15 +1,16 @@
-import { FormEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useSignIn, useSignOut, useAuthHeader } from "react-auth-kit";
 import { useFormik } from "formik";
 
-export const AddAdmin = (props: any) => {
+interface RegistrationFormData {
+  name: string;
+  email: string;
+  password: string;
+}
+
+export const AddAdmin = () => {
   const navigate = useNavigate();
-  const authToken = useAuthHeader();
 
-  const onSubmit = async (values: any) => {
-    console.log("Values", values);
-
+  const onSubmit = async (values: RegistrationFormData) => {
     try {
       const res = await fetch("http://localhost:3001/register", {
         method: "POST",
@@ -18,11 +19,6 @@ export const AddAdmin = (props: any) => {
         },
         body: JSON.stringify(values),
       });
-
-      const data = await res.json();
-      console.log("data", data);
-
-      console.log(data);
 
       navigate("/login");
     } catch (err) {

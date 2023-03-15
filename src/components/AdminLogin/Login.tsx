@@ -1,21 +1,21 @@
-import { FormEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useSignIn, useSignOut, useAuthHeader } from "react-auth-kit";
+import { useSignIn, useAuthHeader } from "react-auth-kit";
 import { useFormik } from "formik";
 
 import "./Login.css";
 
-export const Login = (props: any) => {
+export const Login = () => {
   const signIn = useSignIn();
   const navigate = useNavigate();
   const authToken = useAuthHeader();
 
-  const onSubmit = async (values: any) => {
-    console.log("Values", values);
+  interface LoginDataForm {
+    email: string;
+    password: string;
+  }
 
+  const onSubmit = async (values: LoginDataForm) => {
     try {
-      console.log(authToken());
-
       const res = await fetch("http://localhost:3001/login", {
         method: "POST",
         credentials: "include",
@@ -27,7 +27,6 @@ export const Login = (props: any) => {
       });
 
       const data = await res.json();
-      console.log("data", data);
 
       // sending cookie annd other
       // make auth
@@ -40,8 +39,6 @@ export const Login = (props: any) => {
         //info user
         authState: { email: values.email },
       });
-
-      console.log(data);
 
       navigate("/driver");
     } catch (err) {
