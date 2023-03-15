@@ -26,11 +26,10 @@
 .box {
   padding: 1%;
   margin: 2%;
-
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   color: var(--color-text-light);
   background-color: var(--color-background-dark);
 }

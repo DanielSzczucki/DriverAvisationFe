@@ -38,7 +38,7 @@ export const LoadsList = () => {
       <div className="section-head">
         <h2>Loads</h2>
         <p>
-          <Link to="/load/add">➕Add</Link>
+          <Link to="/load/add">+Add</Link>
         </p>
       </div>
       <div className="box glass">
