@@ -1,5 +1,8 @@
+import { EventHandler, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
+import { Popup } from "../common/Popup/Popup";
+import { SpinnerLoading } from "../common/SpinnerLoading/SpinnerLoading";
 
 interface RegistrationFormData {
   name: string;
@@ -9,8 +12,12 @@ interface RegistrationFormData {
 
 export const AddAdmin = () => {
   const navigate = useNavigate();
+  const [isVisible, setIsVisible] = useState(false);
+  const [message, setMessage] = useState("");
 
   const onSubmit = async (values: RegistrationFormData) => {
+    setIsVisible(() => true);
+
     try {
       const res = await fetch("http://localhost:3001/register", {
         method: "POST",
@@ -20,7 +27,10 @@ export const AddAdmin = () => {
         body: JSON.stringify(values),
       });
 
-      navigate("/login");
+      const data = await res.json();
+      setMessage(data.message);
+      console.log(data);
+      // navigate("/login");
     } catch (err) {
       console.log(err);
     }
@@ -39,6 +49,11 @@ export const AddAdmin = () => {
 
   return (
     <>
+      <Popup
+        isVisible={isVisible}
+        onClose={() => setIsVisible(false)}
+        message={message}
+      />
       <header className="section-head">
         <h2>User registration form</h2>
       </header>

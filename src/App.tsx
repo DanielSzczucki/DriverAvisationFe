@@ -1,6 +1,4 @@
-import React from "react";
-
-import "./App.css";
+import React, { useState } from "react";
 import { AddDriver } from "./components/AddDriver/AddDriver";
 import { Header } from "./components/Header/Header";
 import { Routes, Route } from "react-router-dom";
@@ -13,6 +11,8 @@ import { ErrorView } from "./components/views/ErrorView";
 import { Login } from "./components/AdminLogin/Login";
 import { AddAdmin } from "./components/AddAdmin/AddAdmin";
 import { AddLoad } from "./components/AddLoad/AddLoad";
+
+import "./App.css";
 
 function App() {
   return (

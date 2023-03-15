@@ -1,25 +1,29 @@
-import React, { useState } from "react";
+import React, { StaticLifecycle, useState } from "react";
 import "./Popup.css";
+import { SpinnerLoading } from "../SpinnerLoading/SpinnerLoading";
 
 interface Props {
   isVisible: boolean;
+  onClose: () => void;
   message: React.ReactNode;
   //children as message to show
 }
 
 export const Popup = (props: Props) => {
-  const [isVisible, setIsVisible] = useState(props.isVisible);
+  if (!props.isVisible) return null;
 
-  const handleClose = () => {
-    setIsVisible(false);
-  };
-
-  return isVisible ? (
-    <div className="glass Popup">
-      <p className="popup-content">{props.message}</p>
-      <button className="close-button" onClick={handleClose}>
-        ✖
-      </button>
-    </div>
-  ) : null;
+  return (
+    <>
+      <div className="overlay glass">
+        <div className="popupContainer">
+          <div className="popupContent">
+            <p>{props.message}</p>
+          </div>
+          <button className="closeBtn glass error-box" onClick={props.onClose}>
+            ✖
+          </button>
+        </div>
+      </div>
+    </>
+  );
 };

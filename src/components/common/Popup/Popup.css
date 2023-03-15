@@ -1,25 +1,42 @@
-.Popup {
-  width: 90%;
-  height: 90vh;
+.overlay {
+  width: 100%;
+  height: 100vh;
   padding: 2%;
-  margin: 5%;
   position: absolute;
   z-index: 1;
   display: flex;
-  flex-wrap: wrap;
-  align-content: stretch;
+  align-items: center;
   justify-content: space-around;
+}
+
+.popupContainer {
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 
-.popup-content {
-  width: 100%;
-  margin: 2%;
+.popupContent {
+  max-width: 600px;
+  width: 90%;
+  margin: 5%;
   padding: 2%;
-  align-self: center;
+  color: var(--color-text-contrast);
 }
 
-.close-button {
-  width: 10%;
-  height: 8%;
+.closeBtn {
+  width: 2rem;
+  height: 2rem;
+  background-color: rgba(241, 46, 46, 0.44);
+  list-style: none;
+  border: none;
+  color: var(--color-text-contrast);
+}
+
+.closeBtn:hover {
+  font-size: 1.5rem;
+  background-color: rgba(241, 46, 46, 0.66);
+  color: var(--color-text-contrast);
 }

@@ -1,5 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import { useSignOut, useIsAuthenticated } from "react-auth-kit";
+import { Popup } from "../common/Popup/Popup";
+import { useState } from "react";
 import "./Header.css";
 
 export const Header = () => {
@@ -17,8 +19,7 @@ export const Header = () => {
         },
       });
 
-      const logoutInfo = await logoutRes.json();
-      console.log(logoutInfo);
+      const logoutData = await logoutRes.json();
     } catch (e) {
       console.error(e);
     }
