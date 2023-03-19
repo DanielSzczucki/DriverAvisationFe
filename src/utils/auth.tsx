@@ -1,14 +1,9 @@
 //not using
-import React, {
-  useState,
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-} from "react";
-import { Navigate, redirect, useNavigate } from "react-router-dom";
+import { useState, createContext, ReactNode, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { config } from "./config";
 
-/////////////////////////////////////////unused
+/////////////////////////////////////////unused, saved for other solution in this topic
 
 interface AuthContextInterface {
   user: any;
@@ -30,7 +25,7 @@ export const AuthProvider = ({ children }: Props) => {
 
   const login = async (user: any) => {
     try {
-      const res = await fetch("http://localhost:3001/login", {
+      const res = await fetch(`${config.apiUrl}/login`, {
         method: "POST",
         credentials: "include",
         headers: {
@@ -56,7 +51,7 @@ export const AuthProvider = ({ children }: Props) => {
 
   const logout = async () => {
     try {
-      const logoutRes = await fetch("http://localhost:3001/logout", {
+      const logoutRes = await fetch(`${config.apiUrl}/logout`, {
         method: "POST",
         credentials: "include",
         headers: {

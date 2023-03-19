@@ -1,31 +1,24 @@
-import { createRefresh } from "react-auth-kit";
-import { useAuthHeader, useSignIn } from "react-auth-kit";
+import { createRefresh, useAuthHeader } from "react-auth-kit";
+import { config } from "./config";
 
 export const refreshApi = createRefresh({
-  interval: 5,
-  refreshApiCallback: async ({
-    authToken,
-    authTokenExpireAt,
-    refreshToken,
-    refreshTokenExpiresAt,
-    authUserState,
-  }) => {
+  interval: 1,
+  refreshApiCallback: async ({ authToken }) => {
     try {
-      const response = await fetch("http://localhost:3001/refresh", {
+      const response = await fetch(`${config.apiUrl}/refresh`, {
         method: "POST",
         credentials: "include",
         headers: {
           "Content-Type": "application/json",
           Authorization: `${authToken}`,
         },
-        //change: token sent, is a temporaty solution, refresh token must be refresh token - change on backend to
+        //change: token send, is a temporaty solution, refresh token must be refresh token - change on backend to
         body: JSON.stringify({
           refreshToken: authToken,
           oldAuthToken: authToken,
         }),
       });
       const data = await response.json();
-      console.log("refresh data", data);
 
       return {
         isSuccess: true,
