@@ -1,53 +1,59 @@
 import React, { useEffect, useState } from "react";
-import {
-  CreateLoadReq,
-  DriverEntity,
-  GetSingleLoadRes,
-  LoadEntity,
-} from "types";
+import { DriverEntity, GetSingleDriverRes, GetSingleLoadRes } from "types";
+import { config } from "../../utils/config";
 import { useAuthHeader } from "react-auth-kit";
 import { Link, useParams } from "react-router-dom";
+import { SpinnerLoading } from "../common/SpinnerLoading/SpinnerLoading";
 
 export const SingleLoadView = () => {
   const [loadInfo, setLoadInfo] = useState<GetSingleLoadRes | null>(null);
-  const [driverInfo, setDriverInfo] = useState<DriverEntity | null>(null);
+  const [driverInfo, setDriverInfo] = useState<GetSingleDriverRes | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const { singleLoadId } = useParams();
   const authToken = useAuthHeader();
 
   useEffect(() => {
-    (async () => {
-      const loadRes = await fetch(
-        `http://localhost:3001/load/${singleLoadId}`,
-        {
+    setIsLoading(true);
+    try {
+      (async () => {
+        const loadResUrl = `${config.apiUrl}/load/${singleLoadId}`;
+        const driverResUrl = `${config.apiUrl}/driver/`;
+
+        const loadRes = await fetch(loadResUrl, {
           credentials: "include",
           headers: {
             "Content-Type": "application/json",
             Authorization: `${authToken()}`,
           },
-        }
-      );
-      const loadData = await loadRes.json();
+        });
 
-      setLoadInfo(loadData);
-    })();
+        const loadResData: GetSingleLoadRes = await loadRes.json();
+
+        const { driverId } = loadResData.load;
+
+        const driverRes = await fetch(`${driverResUrl}${driverId}`, {
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `${authToken()}`,
+          },
+        });
+
+        const driverResData: GetSingleDriverRes = await driverRes.json();
+        console.log(driverResData);
+
+        setLoadInfo(loadResData);
+        setDriverInfo(driverResData);
+        setIsLoading(false);
+      })();
+    } catch (e) {
+      setIsLoading(false);
+      console.error(e);
+    }
   }, []);
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const driverRes = await fetch(
-  //       `http://localhost:3001/driver/${loadInfo?.load.driverId}`
-  //     );
-
-  //     const driverData = await driverRes.json();
-
-  //     console.log(driverData);
-
-  //     setDriverInfo(driverData);
-  //   })();
-  // }, [loadInfo]);
-
-  if (loadInfo === null) {
-    return null;
+  if (isLoading) {
+    return <SpinnerLoading />;
   }
 
   return (
@@ -62,11 +68,11 @@ export const SingleLoadView = () => {
         <p>Quantity: {loadInfo?.load.quantity}</p>
         <p>Weight: {loadInfo?.load.weight}</p>
         <p>
-          Driver: {driverInfo?.name ?? "not sign"}{" "}
-          {driverInfo?.lastName ?? "not sign"}
+          Driver: {driverInfo?.driver.name ?? "not sign"}{" "}
+          {driverInfo?.driver.lastName ?? "not sign"}
         </p>
-        <p>Truck: {driverInfo?.truckNumber ?? "not sign"}</p>
-        <p>Trailer: {driverInfo?.trailerNumber ?? "not sign"}</p>
+        <p>Truck: {driverInfo?.driver.truckNumber ?? "not sign"}</p>
+        <p>Trailer: {driverInfo?.driver.trailerNumber ?? "not sign"}</p>
         <p>Counted given loads: {loadInfo?.givenCount ?? "not sign"}</p>
         <p>
           <Link to="/load">Go back to list</Link>

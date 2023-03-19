@@ -1,14 +1,9 @@
-//@TODO sprawdz commity i wróć do commita z przed merga.. właściwie to nie wracaj bo teraz zasysa dane z obu miejsc. sprawdż tylko songl load view
-
 import React, { useEffect, useState } from "react";
-import {
-  DriverEntity,
-  GetSingleDriverRes,
-  GetSingleLoadRes,
-  ListDriverRes,
-} from "types";
+import { GetSingleDriverRes, GetSingleLoadRes } from "types";
 import { Link, useParams } from "react-router-dom";
 import { useAuthHeader } from "react-auth-kit";
+import { config } from "../../utils/config";
+import { SpinnerLoading } from "../common/SpinnerLoading/SpinnerLoading";
 
 import "./Views.css";
 
@@ -17,45 +12,49 @@ export const SingleDriverView = () => {
   const [driverInfo, setDriverInfo] = useState<GetSingleDriverRes | null>(null);
   const [loadInfo, setLoadInfo] = useState<GetSingleLoadRes | null>(null);
   const authToken = useAuthHeader();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    (async () => {
-      const driverRes = await fetch(
-        `http://localhost:3001/driver/${singleDriverId}`,
-        {
+    setIsLoading(true);
+    try {
+      (async () => {
+        const driverResUrl = `${config.apiUrl}/driver/${singleDriverId}`;
+        const loadResUrl = `${config.apiUrl}/load/`;
+
+        const driverRes = await fetch(driverResUrl, {
           credentials: "include",
           headers: {
             "Content-Type": "application/json",
             Authorization: `${authToken()}`,
           },
-        }
-      );
+        });
 
-      const driverData = await driverRes.json();
+        const driverResData: GetSingleDriverRes = await driverRes.json();
 
-      setDriverInfo(driverData);
-    })();
-  }, []);
+        const LoadId = driverResData.driver.loadId;
 
-  useEffect(() => {
-    (async () => {
-      const loadRes = await fetch(
-        `http://localhost:3001/load/${driverInfo?.driver.loadId}`,
-        {
+        const loadRes = await fetch(`${loadResUrl}${LoadId}`, {
           credentials: "include",
           headers: {
-            "Content-type": "application/json",
+            Content_Type: "application/json",
             Authorization: `${authToken()}`,
           },
-        }
-      );
-      const loadData = await loadRes.json();
-      setLoadInfo(loadData);
-    })();
-  }, [driverInfo]);
+        });
 
-  if (driverInfo === null) {
-    return null;
+        const loadResData: GetSingleLoadRes = await loadRes.json();
+
+        setDriverInfo(driverResData);
+        setLoadInfo(loadResData);
+        setIsLoading(false);
+      })();
+    } catch (e) {
+      setIsLoading(false);
+      console.error(e);
+    }
+  }, []);
+
+  if (isLoading) {
+    return <SpinnerLoading />;
   }
 
   return (
@@ -67,7 +66,7 @@ export const SingleDriverView = () => {
         </p>
         <p>Driver Id: {driverInfo?.driver.id}</p>
         <p>Ref: {driverInfo?.driver.referenceNumber}</p>
-        <p>Company: {driverInfo.driver.companyName}</p>
+        <p>Company: {driverInfo?.driver.companyName}</p>
         <p>Phone: {driverInfo?.driver.phoneNumber}</p>
         <p>Truck: {driverInfo?.driver.truckNumber}</p>
         <p>Trailer: {driverInfo?.driver.trailerNumber}</p>
