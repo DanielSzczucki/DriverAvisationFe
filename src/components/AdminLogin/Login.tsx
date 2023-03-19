@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useSignIn, useAuthHeader } from "react-auth-kit";
 import { useFormik } from "formik";
+import { config } from "../../utils/config";
 
 import "./Login.css";
 
@@ -16,7 +17,7 @@ export const Login = () => {
 
   const onSubmit = async (values: LoginDataForm) => {
     try {
-      const res = await fetch("http://localhost:3001/login", {
+      const res = await fetch(`${config.apiUrl}/login`, {
         method: "POST",
         credentials: "include",
         headers: {

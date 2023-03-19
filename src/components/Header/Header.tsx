@@ -1,7 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import { useSignOut, useIsAuthenticated } from "react-auth-kit";
-import { Popup } from "../common/Popup/Popup";
-import { useState } from "react";
+import { config } from "../../utils/config";
+
 import "./Header.css";
 
 export const Header = () => {
@@ -11,7 +11,7 @@ export const Header = () => {
   //@TODO - this needs to be fixed, auth model needs to be changed
   const logout = async () => {
     try {
-      const logoutRes = await fetch("http://localhost:3001/logout", {
+      const logoutRes = await fetch(`${config.apiUrl}/logout`, {
         method: "POST",
         credentials: "include",
         headers: {

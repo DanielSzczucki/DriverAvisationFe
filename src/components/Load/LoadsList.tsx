@@ -4,6 +4,7 @@ import { SpinnerLoading } from "../common/SpinnerLoading/SpinnerLoading";
 import { LoadsTable } from "./LoadsTable";
 import { Link } from "react-router-dom";
 import { useAuthHeader } from "react-auth-kit";
+import { config } from "../../utils/config";
 
 export const LoadsList = () => {
   const [loadsList, setLoadsList] = useState<LoadEntity[] | null>(null);
@@ -11,7 +12,7 @@ export const LoadsList = () => {
 
   const refreshLoadsList = () => {
     (async () => {
-      const res = await fetch("http://localhost:3001/load", {
+      const res = await fetch(`${config.apiUrl}/load`, {
         credentials: "include",
         headers: {
           "Content-Type": "application/json",

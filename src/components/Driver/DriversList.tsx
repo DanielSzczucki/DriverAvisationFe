@@ -3,8 +3,9 @@ import { Link, useParams } from "react-router-dom";
 import { DriverEntity, ListDriverRes, LoadEntity } from "types";
 import { SpinnerLoading } from "../common/SpinnerLoading/SpinnerLoading";
 import { DriversTable } from "./DriversTable";
-import { useSignIn } from "react-auth-kit";
 import { useAuthHeader } from "react-auth-kit";
+import { config } from "../../utils/config";
+
 import "./Table.css";
 
 export const DriverList = () => {
@@ -12,7 +13,7 @@ export const DriverList = () => {
   const authToken = useAuthHeader();
 
   const refreshList = async () => {
-    const driverrRes = await fetch("http://localhost:3001/driver", {
+    const driverrRes = await fetch(`${config.apiUrl}/driver`, {
       credentials: "include",
       headers: {
         Authorization: `${authToken()}`,

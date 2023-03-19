@@ -35,36 +35,3 @@ export const LoadsTable = (props: Props) => {
     </>
   );
 };
-
-// let listLoad = [
-//   {
-//     id: "4c987283-8ab1-11ed-a9d0-770ddd2d",
-//     referenceNumber: "RUS-2301-001",
-//     loadName: "Poczta",
-//     sender: "DPD POLAND",
-//     recipient: "BRT ITALY",
-//     units: "Pallets",
-//     quantity: 66,
-//     weight: 8650,
-//   },
-//   {
-//     id: "4c987283-8ab1-11ed-a9d0-770ddd2d",
-//     referenceNumber: "RUS-2301-001",
-//     loadName: "Poczta",
-//     sender: "DPD POLAND",
-//     recipient: "BRT ITALY",
-//     units: "Pallets",
-//     quantity: 66,
-//     weight: 8650,
-//   },
-//   {
-//     id: "4c987283-8ab1-11ed-a9d0-770ddd2d",
-//     referenceNumber: "RUS-2301-001",
-//     loadName: "Poczta",
-//     sender: "DPD POLAND",
-//     recipient: "BRT ITALY",
-//     units: "Pallets",
-//     quantity: 66,
-//     weight: 8650,
-//   },
-// ];

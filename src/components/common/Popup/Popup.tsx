@@ -6,7 +6,6 @@ interface Props {
   isVisible: boolean;
   onClose: () => void;
   message: React.ReactNode;
-  //children as message to show
 }
 
 export const Popup = (props: Props) => {

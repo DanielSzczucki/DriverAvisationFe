@@ -1,6 +1,8 @@
 import React, { FormEvent, useState } from "react";
-import { CreateDriverReq, CreateLoadReq, DriverEntity } from "types";
+import { CreateDriverReq, DriverEntity } from "types";
 import { SpinnerLoading } from "../common/SpinnerLoading/SpinnerLoading";
+import { config } from "../../utils/config";
+
 import "./AddDriver.css";
 
 export const AddDriver = () => {
@@ -32,7 +34,7 @@ export const AddDriver = () => {
 
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:3001/driver", {
+      const res = await fetch(`${config.apiUrl}/driver`, {
         method: "POST",
         credentials: "include",
         headers: {

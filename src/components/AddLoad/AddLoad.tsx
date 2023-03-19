@@ -2,6 +2,7 @@ import React, { FormEvent, useState } from "react";
 import { CreateLoadReq, LoadEntity, Units } from "types";
 import { SpinnerLoading } from "../common/SpinnerLoading/SpinnerLoading";
 import { Link } from "react-router-dom";
+import { config } from "../../utils/config";
 
 export const AddLoad = () => {
   const [form, setForm] = useState<CreateLoadReq>({
@@ -13,8 +14,9 @@ export const AddLoad = () => {
     units: Units.other,
     quantity: 0,
     weight: 0,
-    driverId: "",
     count: 0,
+    startDate: "",
+    driverId: "",
   });
 
   const [loading, setLoading] = useState<boolean>(false);
@@ -28,10 +30,12 @@ export const AddLoad = () => {
   };
 
   const sendForm = async (e: FormEvent) => {
+    console.log("PRZESŁANO");
     e.preventDefault();
     setLoading(true);
+    //${config.apiUrl}/load
     try {
-      const res = await fetch(`http://localhost:3001/load`, {
+      const res = await fetch(`http://localhost:3001/api/load`, {
         method: "POST",
         credentials: "include",
         headers: {
@@ -58,7 +62,6 @@ export const AddLoad = () => {
         <div className="good-box">
           <p>{resultInfo}</p>
           <p>
-            {" "}
             <Link to="/loads">Loads List</Link>{" "}
           </p>
         </div>
@@ -127,6 +130,7 @@ export const AddLoad = () => {
               <option>{Units[Units.other]}</option>
               <option>{Units[Units.pallets]}</option>
               <option>{Units[Units.pcs]}</option>
+              <option>{Units[Units.ldm]}</option>
             </select>
           </label>
           <br />
@@ -150,7 +154,7 @@ export const AddLoad = () => {
             />
           </label>
           <br />
-          <label>
+          {/* <label>
             Count: <br />
             <input
               type="text"
@@ -158,7 +162,8 @@ export const AddLoad = () => {
               onChange={(e) => updateForm("count", e.target.value)}
             />
           </label>
-          <br />
+          <br /> */}
+
           <label>
             Driver Id: <br />
             <input

@@ -2,7 +2,7 @@ import { EventHandler, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { Popup } from "../common/Popup/Popup";
-import { SpinnerLoading } from "../common/SpinnerLoading/SpinnerLoading";
+import { config } from "../../utils/config";
 
 interface RegistrationFormData {
   name: string;
@@ -27,7 +27,7 @@ export const AddAdmin = () => {
     setIsVisible(true);
 
     try {
-      const res = await fetch("http://localhost:3001/register", {
+      const res = await fetch(`${config.apiUrl}/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
