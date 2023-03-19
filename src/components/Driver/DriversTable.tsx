@@ -1,9 +1,7 @@
-import React from "react";
 import { DriverEntity, LoadEntity } from "types";
 import { DriverTableRow } from "./DriverTableRow";
 
 import "./Table.css";
-import { Link } from "react-router-dom";
 
 interface Props {
   driversList: DriverEntity[];

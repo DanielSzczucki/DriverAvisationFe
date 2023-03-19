@@ -21,7 +21,6 @@ export const DriverList = () => {
       },
     });
     const driverDataRes = await driverrRes.json();
-    console.log(driverDataRes);
 
     setDriverData(driverDataRes);
   };

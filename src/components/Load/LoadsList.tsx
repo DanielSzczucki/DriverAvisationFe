@@ -20,7 +20,7 @@ export const LoadsList = () => {
         },
       });
       const data = await res.json();
-      console.log("Token", authToken());
+      //data contains token
 
       setLoadsList(data.loadList);
     })();

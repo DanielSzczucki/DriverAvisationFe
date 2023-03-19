@@ -6,11 +6,11 @@ import { Link, useParams } from "react-router-dom";
 import { SpinnerLoading } from "../common/SpinnerLoading/SpinnerLoading";
 
 export const SingleLoadView = () => {
+  const { singleLoadId } = useParams();
+  const authToken = useAuthHeader();
   const [loadInfo, setLoadInfo] = useState<GetSingleLoadRes | null>(null);
   const [driverInfo, setDriverInfo] = useState<GetSingleDriverRes | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const { singleLoadId } = useParams();
-  const authToken = useAuthHeader();
 
   useEffect(() => {
     setIsLoading(true);
@@ -40,7 +40,6 @@ export const SingleLoadView = () => {
         });
 
         const driverResData: GetSingleDriverRes = await driverRes.json();
-        console.log(driverResData);
 
         setLoadInfo(loadResData);
         setDriverInfo(driverResData);

@@ -9,9 +9,9 @@ import "./Views.css";
 
 export const SingleDriverView = () => {
   const { singleDriverId } = useParams();
+  const authToken = useAuthHeader();
   const [driverInfo, setDriverInfo] = useState<GetSingleDriverRes | null>(null);
   const [loadInfo, setLoadInfo] = useState<GetSingleLoadRes | null>(null);
-  const authToken = useAuthHeader();
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {

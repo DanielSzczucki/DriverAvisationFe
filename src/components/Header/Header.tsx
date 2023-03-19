@@ -50,9 +50,9 @@ export const Header = () => {
               </Link>
             </button>
           ) : (
-            <button className="">
-              <Link to="/login">🔑</Link>
-            </button>
+            <Link to="/login">
+              <button className="">🔑</button>
+            </Link>
           )}
         </div>
       </div>
