@@ -1,7 +1,7 @@
 import React, { FormEvent, useState } from "react";
 import { CreateLoadReq, LoadEntity, Units } from "types";
 import { SpinnerLoading } from "../common/SpinnerLoading/SpinnerLoading";
-import { Link } from "react-router-dom";
+import { Link, redirect } from "react-router-dom";
 import { config } from "../../utils/config";
 
 export const AddLoad = () => {
@@ -30,12 +30,11 @@ export const AddLoad = () => {
   };
 
   const sendForm = async (e: FormEvent) => {
-    console.log("PRZESŁANO");
     e.preventDefault();
     setLoading(true);
     //${config.apiUrl}/load
     try {
-      const res = await fetch(`http://localhost:3001/api/load`, {
+      const res = await fetch(`${config.apiUrl}/load`, {
         method: "POST",
         credentials: "include",
         headers: {
@@ -47,6 +46,10 @@ export const AddLoad = () => {
 
       setLoading(false);
       setResultInfo(`${data.loadName} added with ref: ${data.referenceNumber}`);
+
+      setTimeout(() => {
+        redirect("/load");
+      }, 4000);
     } finally {
       setLoading(false);
     }
@@ -62,7 +65,7 @@ export const AddLoad = () => {
         <div className="good-box">
           <p>{resultInfo}</p>
           <p>
-            <Link to="/loads">Loads List</Link>{" "}
+            <Link to="/load">Loads List</Link>
           </p>
         </div>
       </>

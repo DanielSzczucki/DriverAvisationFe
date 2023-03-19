@@ -4,8 +4,16 @@ import { SpinnerLoading } from "../common/SpinnerLoading/SpinnerLoading";
 import { config } from "../../utils/config";
 
 import "./AddDriver.css";
+import { redirect, useNavigate } from "react-router-dom";
+import { Popup } from "../common/Popup/Popup";
+import { ErrorView } from "../views/ErrorView";
 
 export const AddDriver = () => {
+  const navigate = useNavigate();
+  const [isVisible, setIsVisible] = useState(false);
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState(false);
+
   const [form, setForm] = useState<CreateDriverReq>({
     name: "",
     lastName: "",
@@ -45,10 +53,31 @@ export const AddDriver = () => {
       const data: DriverEntity = await res.json();
       setLoading(false);
       setResultInfo(`${data.name} added with ref: ${data.referenceNumber}`);
+
+      setTimeout(() => {
+        navigate("/");
+      }, 4000);
     } finally {
       setLoading(false);
+      setError(true);
     }
   };
+
+  // switch (true) {
+  //   case loading:
+  //     return <SpinnerLoading />;
+  //   case resultInfo !== null:
+  //     return (
+  //       <>
+  //         <div className="good-box">
+  //           <p>{resultInfo}</p>
+  //           <p>Thank you. Please wait in your truck</p>
+  //         </div>
+  //       </>
+  //     );
+  //   case error:
+  //     return <ErrorView />;
+  // }
 
   if (loading) {
     return <SpinnerLoading />;
@@ -63,6 +92,10 @@ export const AddDriver = () => {
         </div>
       </>
     );
+  }
+
+  if (error) {
+    return <ErrorView />;
   }
 
   return (
