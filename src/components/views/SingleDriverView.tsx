@@ -6,6 +6,7 @@ import { config } from "../../utils/config";
 import { SpinnerLoading } from "../common/SpinnerLoading/SpinnerLoading";
 
 import "./Views.css";
+import { ErrorView } from "./ErrorView";
 
 export const SingleDriverView = () => {
   const { singleDriverId } = useParams();
@@ -13,6 +14,7 @@ export const SingleDriverView = () => {
   const [driverInfo, setDriverInfo] = useState<GetSingleDriverRes | null>(null);
   const [loadInfo, setLoadInfo] = useState<GetSingleLoadRes | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
@@ -49,12 +51,17 @@ export const SingleDriverView = () => {
       })();
     } catch (e) {
       setIsLoading(false);
+      setError(true);
       console.error(e);
     }
-  }, []);
+  }, [singleDriverId]);
 
   if (isLoading) {
     return <SpinnerLoading />;
+  }
+
+  if (error) {
+    return <ErrorView />;
   }
 
   return (

@@ -4,6 +4,7 @@ import { config } from "../../utils/config";
 import { useAuthHeader } from "react-auth-kit";
 import { Link, useParams } from "react-router-dom";
 import { SpinnerLoading } from "../common/SpinnerLoading/SpinnerLoading";
+import { ErrorView } from "./ErrorView";
 
 export const SingleLoadView = () => {
   const { singleLoadId } = useParams();
@@ -11,6 +12,7 @@ export const SingleLoadView = () => {
   const [loadInfo, setLoadInfo] = useState<GetSingleLoadRes | null>(null);
   const [driverInfo, setDriverInfo] = useState<GetSingleDriverRes | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
@@ -48,11 +50,16 @@ export const SingleLoadView = () => {
     } catch (e) {
       setIsLoading(false);
       console.error(e);
+      setError(true);
     }
-  }, []);
+  }, [singleLoadId]);
 
   if (isLoading) {
     return <SpinnerLoading />;
+  }
+
+  if (error) {
+    return <ErrorView />;
   }
 
   return (
