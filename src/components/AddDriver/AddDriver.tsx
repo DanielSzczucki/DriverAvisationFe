@@ -130,6 +130,7 @@ export const AddDriver = () => {
               onChange={(e) => updateForm("phoneNumber", e.target.value)}
             />
           </label>
+
           <br />
           <label>
             Reference Number (12 signs: xxx-xxxx-xxx) : <br />
@@ -142,6 +143,7 @@ export const AddDriver = () => {
             />
           </label>
           <br />
+
           <label>
             Your Company Name: <br />
             <input

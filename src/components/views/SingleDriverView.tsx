@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { GetSingleDriverRes, GetSingleLoadRes } from "types";
+import { GetSingleDriverRes, GetSingleLoadRes, LoadEntity } from "types";
 import { Link, useParams } from "react-router-dom";
 import { useAuthHeader } from "react-auth-kit";
 import { config } from "../../utils/config";
@@ -7,12 +7,19 @@ import { SpinnerLoading } from "../common/SpinnerLoading/SpinnerLoading";
 
 import "./Views.css";
 import { ErrorView } from "./ErrorView";
+import { SingleLoadView } from "./SingleLoadView";
+
+interface ResData {
+  loadRouter: string;
+  loadList: GetSingleLoadRes[];
+  driverList: GetSingleDriverRes[];
+}
 
 export const SingleDriverView = () => {
   const { singleDriverId } = useParams();
   const authToken = useAuthHeader();
   const [driverInfo, setDriverInfo] = useState<GetSingleDriverRes | null>(null);
-  const [loadInfo, setLoadInfo] = useState<GetSingleLoadRes | null>(null);
+  const [loadInfo, setLoadInfo] = useState<LoadEntity | undefined>(undefined);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
 
@@ -34,10 +41,10 @@ export const SingleDriverView = () => {
         const driverResData: GetSingleDriverRes = await driverRes.json();
 
         setDriverInfo(driverResData);
-        const loadId = driverResData.driver.loadId;
+        const { referenceNumber } = driverResData.driver;
 
-        if (loadId) {
-          const loadRes = await fetch(`${loadResUrl}${loadId}`, {
+        if (referenceNumber) {
+          const resData = await fetch(`${loadResUrl}`, {
             credentials: "include",
             headers: {
               Content_Type: "application/json",
@@ -45,9 +52,17 @@ export const SingleDriverView = () => {
             },
           });
 
-          const loadResData: GetSingleLoadRes = await loadRes.json();
+          const { loadList }: { loadList: LoadEntity[] } = await resData.json();
 
-          setLoadInfo(loadResData);
+          console.log(loadList);
+
+          const loadForDriver = loadList.find(
+            (load) => load.referenceNumber === referenceNumber
+          );
+
+          console.log(loadForDriver);
+
+          setLoadInfo(loadForDriver);
         }
 
         setIsLoading(false);
@@ -76,8 +91,15 @@ export const SingleDriverView = () => {
         <p>Phone: {driverInfo?.driver.phoneNumber}</p>
         <p>Truck: {driverInfo?.driver.truckNumber}</p>
         <p>Trailer: {driverInfo?.driver.trailerNumber}</p>
-        <p>Load Name: {loadInfo?.load.loadName ?? "not sign"}</p>
-        <p>Counted given loads: {loadInfo?.givenCount ?? "not sign"}</p>
+        <p>Load Name: {loadInfo?.loadName ?? "not sign"}</p>
+
+        {/* <p>Counted given loads: {loadInfo?.givenCount ?? "not sign"}</p> sprawdz jak pobrać ten temat, zrób do tego aktualizację w bd */}
+
+        <form>
+          <label>
+            <input type="text" />
+          </label>
+        </form>
         <p>
           <Link to="/driver">Go back to list</Link>
         </p>
