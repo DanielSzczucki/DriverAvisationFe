@@ -1,7 +1,7 @@
 import React, { FormEvent, useState } from "react";
 import { CreateLoadReq, LoadEntity, Units } from "types";
 import { SpinnerLoading } from "../common/SpinnerLoading/SpinnerLoading";
-import { Link, redirect } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
 import { config } from "../../utils/config";
 
 export const AddLoad = () => {
@@ -21,6 +21,7 @@ export const AddLoad = () => {
 
   const [loading, setLoading] = useState<boolean>(false);
   const [resultInfo, setResultInfo] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const updateForm = (key: string, value: any) => {
     setForm((form) => ({
@@ -48,7 +49,7 @@ export const AddLoad = () => {
       setResultInfo(`${data.loadName} added with ref: ${data.referenceNumber}`);
 
       setTimeout(() => {
-        redirect("/load");
+        navigate("/load");
       }, 4000);
     } finally {
       setLoading(false);
@@ -79,17 +80,18 @@ export const AddLoad = () => {
           <h2>Load Registration</h2>
           <br />
           <label>
-            Referenc number: <br />
+            Referenc number: (12 signs) <br />
             <input
               required
               type="text"
               value={form.referenceNumber}
               onChange={(e) => updateForm("referenceNumber", e.target.value)}
+              minLength={12}
             />
           </label>
           <br />
           <label>
-            Load Name:: <br />
+            Load Name: <br />
             <input
               type="text"
               value={form.loadName}
@@ -154,18 +156,10 @@ export const AddLoad = () => {
               type="text"
               value={form.weight}
               onChange={(e) => updateForm("weight", e.target.value)}
+              minLength={1}
             />
           </label>
           <br />
-          {/* <label>
-            Count: <br />
-            <input
-              type="text"
-              value={form.count}
-              onChange={(e) => updateForm("count", e.target.value)}
-            />
-          </label>
-          <br /> */}
 
           <label>
             Driver Id: <br />

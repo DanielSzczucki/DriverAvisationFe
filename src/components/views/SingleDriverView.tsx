@@ -33,20 +33,23 @@ export const SingleDriverView = () => {
 
         const driverResData: GetSingleDriverRes = await driverRes.json();
 
-        const LoadId = driverResData.driver.loadId;
-
-        const loadRes = await fetch(`${loadResUrl}${LoadId}`, {
-          credentials: "include",
-          headers: {
-            Content_Type: "application/json",
-            Authorization: `${authToken()}`,
-          },
-        });
-
-        const loadResData: GetSingleLoadRes = await loadRes.json();
-
         setDriverInfo(driverResData);
-        setLoadInfo(loadResData);
+        const loadId = driverResData.driver.loadId;
+
+        if (loadId) {
+          const loadRes = await fetch(`${loadResUrl}${loadId}`, {
+            credentials: "include",
+            headers: {
+              Content_Type: "application/json",
+              Authorization: `${authToken()}`,
+            },
+          });
+
+          const loadResData: GetSingleLoadRes = await loadRes.json();
+
+          setLoadInfo(loadResData);
+        }
+
         setIsLoading(false);
       })();
     } catch (e) {
@@ -56,12 +59,8 @@ export const SingleDriverView = () => {
     }
   }, [singleDriverId]);
 
-  if (isLoading) {
+  if (!driverInfo) {
     return <SpinnerLoading />;
-  }
-
-  if (error) {
-    return <ErrorView />;
   }
 
   return (

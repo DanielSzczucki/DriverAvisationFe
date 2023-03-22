@@ -30,21 +30,26 @@ export const SingleLoadView = () => {
         });
 
         const loadResData: GetSingleLoadRes = await loadRes.json();
-
-        const { driverId } = loadResData.load;
-
-        const driverRes = await fetch(`${driverResUrl}${driverId}`, {
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `${authToken()}`,
-          },
-        });
-
-        const driverResData: GetSingleDriverRes = await driverRes.json();
-
         setLoadInfo(loadResData);
-        setDriverInfo(driverResData);
+
+        if (loadResData.load.driverId) {
+          const driverRes = await fetch(
+            `${driverResUrl}${loadResData.load.driverId}}`,
+            {
+              credentials: "include",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `${authToken()}`,
+              },
+            }
+          );
+
+          const driverResData: GetSingleDriverRes = await driverRes.json();
+          setDriverInfo(driverResData);
+        } else {
+          return null;
+        }
+
         setIsLoading(false);
       })();
     } catch (e) {
@@ -54,12 +59,8 @@ export const SingleLoadView = () => {
     }
   }, [singleLoadId]);
 
-  if (isLoading) {
+  if (!loadInfo) {
     return <SpinnerLoading />;
-  }
-
-  if (error) {
-    return <ErrorView />;
   }
 
   return (
@@ -73,13 +74,15 @@ export const SingleLoadView = () => {
         <p>Units: {loadInfo?.load.units}</p>
         <p>Quantity: {loadInfo?.load.quantity}</p>
         <p>Weight: {loadInfo?.load.weight}</p>
+
         <p>
-          Driver: {driverInfo?.driver.name ?? "not sign"}{" "}
+          Driver: {driverInfo?.driver.name ?? "not sign"}
           {driverInfo?.driver.lastName ?? "not sign"}
         </p>
         <p>Truck: {driverInfo?.driver.truckNumber ?? "not sign"}</p>
         <p>Trailer: {driverInfo?.driver.trailerNumber ?? "not sign"}</p>
         <p>Counted given loads: {loadInfo?.givenCount ?? "not sign"}</p>
+
         <p>
           <Link to="/load">Go back to list</Link>
         </p>

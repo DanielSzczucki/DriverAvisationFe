@@ -56,7 +56,7 @@ export const AddDriver = () => {
 
       setTimeout(() => {
         navigate("/");
-      }, 4000);
+      }, 3000);
     } finally {
       setLoading(false);
       setError(true);
@@ -132,12 +132,13 @@ export const AddDriver = () => {
           </label>
           <br />
           <label>
-            Reference Number: <br />
+            Reference Number (12 signs: xxx-xxxx-xxx) : <br />
             <input
               type="text"
               value={form.referenceNumber}
               onChange={(e) => updateForm("referenceNumber", e.target.value)}
               required
+              minLength={12}
             />
           </label>
           <br />
