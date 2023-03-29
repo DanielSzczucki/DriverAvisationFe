@@ -42,6 +42,7 @@ export const AddDriver = () => {
 
     try {
       setLoading(true);
+
       const res = await fetch(`${config.apiUrl}/driver`, {
         method: "POST",
         credentials: "include",
@@ -53,6 +54,7 @@ export const AddDriver = () => {
       const data: DriverEntity = await res.json();
       setLoading(false);
       setResultInfo(`${data.name} added with ref: ${data.referenceNumber}`);
+      console.log(data);
 
       setTimeout(() => {
         navigate("/");

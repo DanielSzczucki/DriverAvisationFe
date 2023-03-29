@@ -54,8 +54,6 @@ export const SingleDriverView = () => {
 
           const { loadList }: { loadList: LoadEntity[] } = await resData.json();
 
-          console.log(loadList);
-
           const loadForDriver = loadList.find(
             (load) => load.referenceNumber === referenceNumber
           );
@@ -64,6 +62,8 @@ export const SingleDriverView = () => {
 
           setLoadInfo(loadForDriver);
         }
+
+        //podczas dodawania sprawdz od razu czy sa takie łqdunki i przypisuje ten wlaściwy po numerze ref, natomiast później mozna to edytować - przypisać inny ładunek
 
         setIsLoading(false);
       })();
@@ -92,9 +92,8 @@ export const SingleDriverView = () => {
         <p>Truck: {driverInfo?.driver.truckNumber}</p>
         <p>Trailer: {driverInfo?.driver.trailerNumber}</p>
         <p>Load Name: {loadInfo?.loadName ?? "not sign"}</p>
-
-        {/* <p>Counted given loads: {loadInfo?.givenCount ?? "not sign"}</p> sprawdz jak pobrać ten temat, zrób do tego aktualizację w bd */}
-
+        <p>Counted given loads: {loadInfo?.count ?? "not sign"}</p> sprawdz jak
+        pobrać ten temat, zrób do tego aktualizację w bd
         <form>
           <label>
             <input type="text" />

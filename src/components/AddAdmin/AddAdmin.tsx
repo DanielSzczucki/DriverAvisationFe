@@ -1,4 +1,5 @@
-import { EventHandler, useEffect, useState } from "react";
+import "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { Popup } from "../common/Popup/Popup";

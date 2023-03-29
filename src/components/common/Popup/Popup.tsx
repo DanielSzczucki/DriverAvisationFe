@@ -1,6 +1,5 @@
-import React, { StaticLifecycle, useState } from "react";
+import React from "react";
 import "./Popup.css";
-import { SpinnerLoading } from "../SpinnerLoading/SpinnerLoading";
 
 interface Props {
   isVisible: boolean;

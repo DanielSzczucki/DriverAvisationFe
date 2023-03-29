@@ -35,7 +35,7 @@ export const Login = () => {
         token: data.token.refreshToken,
         refreshToken: data.token.refreshToken,
         refreshTokenExpireIn: 5,
-        expiresIn: 5 * 60,
+        expiresIn: 5,
         tokenType: "Bearer",
         //info user
         authState: { email: values.email },
