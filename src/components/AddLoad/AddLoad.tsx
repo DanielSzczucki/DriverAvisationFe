@@ -3,6 +3,7 @@ import { CreateLoadReq, LoadEntity, Units } from "types";
 import { SpinnerLoading } from "../common/SpinnerLoading/SpinnerLoading";
 import { Link, redirect, useNavigate } from "react-router-dom";
 import { config } from "../../utils/config";
+import { useAuthHeader } from "react-auth-kit";
 
 export const AddLoad = () => {
   const [form, setForm] = useState<CreateLoadReq>({
@@ -22,6 +23,7 @@ export const AddLoad = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [resultInfo, setResultInfo] = useState<string | null>(null);
   const navigate = useNavigate();
+  const authToken = useAuthHeader();
 
   const updateForm = (key: string, value: any) => {
     setForm((form) => ({
@@ -39,6 +41,7 @@ export const AddLoad = () => {
         method: "POST",
         credentials: "include",
         headers: {
+          Authorization: `${authToken()}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(form),

@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { Popup } from "../common/Popup/Popup";
 import { config } from "../../utils/config";
+import { useAuthHeader } from "react-auth-kit";
 
 interface RegistrationFormData {
   name: string;
@@ -13,6 +14,7 @@ interface RegistrationFormData {
 
 export const AddAdmin = () => {
   const navigate = useNavigate();
+  const authToken = useAuthHeader();
   const [isVisible, setIsVisible] = useState(false);
   const [message, setMessage] = useState("");
 
@@ -32,6 +34,7 @@ export const AddAdmin = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `${authToken()}`,
         },
         body: JSON.stringify(values),
       });

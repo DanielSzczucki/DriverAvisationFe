@@ -4,14 +4,14 @@ import { SpinnerLoading } from "../common/SpinnerLoading/SpinnerLoading";
 import { config } from "../../utils/config";
 
 import "./AddDriver.css";
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Popup } from "../common/Popup/Popup";
 import { ErrorView } from "../views/ErrorView";
+import { useAuthHeader } from "react-auth-kit";
 
 export const AddDriver = () => {
   const navigate = useNavigate();
-  const [isVisible, setIsVisible] = useState(false);
-  const [message, setMessage] = useState("");
+  const authToken = useAuthHeader();
   const [error, setError] = useState(false);
 
   const [form, setForm] = useState<CreateDriverReq>({
@@ -47,13 +47,17 @@ export const AddDriver = () => {
         method: "POST",
         credentials: "include",
         headers: {
+          Authorization: `${authToken()}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(form),
       });
       const data: DriverEntity = await res.json();
+
       setLoading(false);
+
       setResultInfo(`${data.name} added with ref: ${data.referenceNumber}`);
+
       console.log(data);
 
       setTimeout(() => {
