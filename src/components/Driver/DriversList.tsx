@@ -7,9 +7,11 @@ import { useAuthHeader } from "react-auth-kit";
 import { config } from "../../utils/config";
 
 import "./Table.css";
+import { Button } from "../common/Button/Button";
 
 export const DriverList = () => {
   const [driverData, setDriverData] = useState<ListDriverRes | null>(null);
+  undefined;
   const authToken = useAuthHeader();
 
   const refreshList = async () => {
@@ -46,6 +48,7 @@ export const DriverList = () => {
         <DriversTable
           driversList={driverData?.driverList}
           loadsList={driverData.loadList}
+          onDelete={() => {}}
         />
       </section>
     </>
