@@ -27,7 +27,10 @@ export const LoadsList = () => {
   };
 
   const handleLoadDelete = async (id: string | undefined) => {
+    console.log(id);
+
     window.alert("Are you realy want to delete this Load?");
+
     if (id !== undefined) {
       const loadRes = await fetch(`${config.apiUrl}/load/${id}`, {
         method: "DELETE",

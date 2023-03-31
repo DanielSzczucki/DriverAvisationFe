@@ -5,7 +5,6 @@ import { config } from "../../utils/config";
 
 import "./AddDriver.css";
 import { useNavigate } from "react-router-dom";
-import { Popup } from "../common/Popup/Popup";
 import { ErrorView } from "../views/ErrorView";
 import { useAuthHeader } from "react-auth-kit";
 
@@ -68,22 +67,6 @@ export const AddDriver = () => {
       setError(true);
     }
   };
-
-  // switch (true) {
-  //   case loading:
-  //     return <SpinnerLoading />;
-  //   case resultInfo !== null:
-  //     return (
-  //       <>
-  //         <div className="good-box">
-  //           <p>{resultInfo}</p>
-  //           <p>Thank you. Please wait in your truck</p>
-  //         </div>
-  //       </>
-  //     );
-  //   case error:
-  //     return <ErrorView />;
-  // }
 
   if (loading) {
     return <SpinnerLoading />;

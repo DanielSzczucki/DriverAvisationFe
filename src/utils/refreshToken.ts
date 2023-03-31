@@ -2,7 +2,7 @@ import { createRefresh, useAuthHeader } from "react-auth-kit";
 import { config } from "./config";
 
 export const refreshApi = createRefresh({
-  interval: 1,
+  interval: 5,
   refreshApiCallback: async ({ authToken }) => {
     try {
       const response = await fetch(`${config.apiUrl}/refresh`, {
@@ -19,6 +19,8 @@ export const refreshApi = createRefresh({
         }),
       });
       const data = await response.json();
+
+      console.log("Refresh APi:", data);
 
       return {
         isSuccess: true,

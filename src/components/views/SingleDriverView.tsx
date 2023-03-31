@@ -92,8 +92,7 @@ export const SingleDriverView = () => {
         <p>Truck: {driverInfo?.driver.truckNumber}</p>
         <p>Trailer: {driverInfo?.driver.trailerNumber}</p>
         <p>Load Name: {loadInfo?.loadName ?? "not sign"}</p>
-        <p>Counted given loads: {loadInfo?.count ?? "not sign"}</p> sprawdz jak
-        pobrać ten temat, zrób do tego aktualizację w bd
+        <p>Counted given loads: {loadInfo?.count ?? "not sign"}</p>
         <form>
           <label>
             <input type="text" />
