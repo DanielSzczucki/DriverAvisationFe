@@ -1,9 +1,14 @@
 import React from "react";
+import "./Button.css";
 
 interface Props {
-  handleClick: () => void;
+  handleClick: () => Promise<void>;
 }
 
 export const Button = (props: Props) => {
-  return <button onClick={props.handleClick}>❌</button>;
+  return (
+    <button className="BtnDelete" onClick={props.handleClick}>
+      ❌
+    </button>
+  );
 };

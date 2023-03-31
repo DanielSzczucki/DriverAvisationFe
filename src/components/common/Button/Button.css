@@ -1,0 +1,12 @@
+@import "../../../styles/variables.css";
+
+.BtnDelete {
+  background-color: inherit;
+  border-radius: 8px;
+  border-style: none;
+}
+
+.BtnDelete:hover {
+  padding: 2%;
+  background-color: var(--color-text-contrast);
+}

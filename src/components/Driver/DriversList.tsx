@@ -11,7 +11,6 @@ import { Button } from "../common/Button/Button";
 
 export const DriverList = () => {
   const [driverData, setDriverData] = useState<ListDriverRes | null>(null);
-  undefined;
   const authToken = useAuthHeader();
 
   const refreshList = async () => {
@@ -25,6 +24,22 @@ export const DriverList = () => {
     const driverDataRes = await driverrRes.json();
 
     setDriverData(driverDataRes);
+  };
+
+  const handleDriverDelete = async (id: string | undefined) => {
+    window.alert("Are you realy want to telete this Driver?");
+    if (id !== undefined) {
+      const driverRes = await fetch(`${config.apiUrl}/driver/${id}`, {
+        method: "DELETE",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const deletedDriverRes = await driverRes.json();
+      refreshList();
+    }
   };
 
   useEffect(() => {
@@ -48,7 +63,7 @@ export const DriverList = () => {
         <DriversTable
           driversList={driverData?.driverList}
           loadsList={driverData.loadList}
-          onDelete={() => {}}
+          onDelete={handleDriverDelete}
         />
       </section>
     </>

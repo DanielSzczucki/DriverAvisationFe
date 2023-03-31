@@ -1,40 +1,16 @@
 import { Link } from "react-router-dom";
 import { DriverEntity, LoadEntity } from "types";
+import { Button } from "../common/Button/Button";
 
 import "./Table.css";
-import { Button } from "../common/Button/Button";
-import { useEffect, useState } from "react";
-import { config } from "../../utils/config";
 
 interface Props {
   driver: DriverEntity;
   loadsList: LoadEntity[];
-  onDelete: (id: string) => void;
+  onDelete: (id: string | undefined) => Promise<void>;
 }
 
 export const DriverTableRow = (props: Props) => {
-  const [selectedId, setSelectedId] = useState<string | undefined>(undefined);
-
-  const handleDelete = async () => {
-    if (selectedId !== undefined) {
-      props.onDelete(selectedId);
-      setSelectedId(undefined);
-      const driverRes = await fetch(`${config.apiUrl}/driver/${selectedId}`, {
-        method: "DELETE",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      const deletedDriverRes = await driverRes.json();
-      console.log(deletedDriverRes);
-    }
-  };
-
-  console.log("SELECTEDID", selectedId);
-  console.log("DRIVERID", props.driver.id);
-
   return (
     <>
       <tr>
@@ -48,7 +24,9 @@ export const DriverTableRow = (props: Props) => {
         <td>{props.driver.trailerNumber}</td>
         {/* <td>{props.driver.loadingUnloading}</td> */}
         <td>{props.driver.loadId}</td>
-        <Button handleClick={() => setSelectedId(props.driver.id)}></Button>
+        <td>
+          <Button handleClick={() => props.onDelete(props.driver.id)}></Button>
+        </td>
       </tr>
     </>
   );
