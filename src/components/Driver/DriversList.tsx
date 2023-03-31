@@ -27,9 +27,10 @@ export const DriverList = () => {
   };
 
   const handleDriverDelete = async (id: string | undefined) => {
-    window.alert("Are you realy want to telete this Driver?");
-    if (id !== undefined) {
-      const driverRes = await fetch(`${config.apiUrl}/driver/${id}`, {
+    const confirmMessage = "Are you realy want to delete this Driver?";
+
+    if (window.confirm(confirmMessage) && id !== undefined) {
+      const driverRes = await fetch(`${config.apiUrl}/load/${id}`, {
         method: "DELETE",
         credentials: "include",
         headers: {
@@ -39,6 +40,7 @@ export const DriverList = () => {
 
       const deletedDriverRes = await driverRes.json();
       refreshList();
+      return deletedDriverRes;
     }
   };
 

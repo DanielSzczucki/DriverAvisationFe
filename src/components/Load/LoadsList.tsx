@@ -28,11 +28,9 @@ export const LoadsList = () => {
   };
 
   const handleLoadDelete = async (id: string | undefined) => {
-    console.log(id);
+    const confirmMessage = "Are you realy want to delete this Load?";
 
-    window.alert("Are you realy want to delete this Load?");
-
-    if (id !== undefined) {
+    if (window.confirm(confirmMessage) && id !== undefined) {
       const loadRes = await fetch(`${config.apiUrl}/load/${id}`, {
         method: "DELETE",
         credentials: "include",
@@ -42,8 +40,8 @@ export const LoadsList = () => {
       });
 
       const deletedLoadRes = await loadRes.json();
-      console.log(deletedLoadRes);
       refreshLoadsList();
+      return deletedLoadRes;
     }
   };
 
@@ -53,9 +51,6 @@ export const LoadsList = () => {
 
   if (loadsList === null) {
     return <SpinnerLoading />;
-  }
-
-  if (isAuth()) {
   }
 
   return (
