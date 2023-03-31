@@ -35,6 +35,7 @@ export const LoadsList = () => {
         method: "DELETE",
         credentials: "include",
         headers: {
+          Authorization: `${authToken()}`,
           "Content-Type": "application/json",
         },
       });

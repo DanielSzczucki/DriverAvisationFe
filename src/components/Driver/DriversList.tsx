@@ -30,10 +30,11 @@ export const DriverList = () => {
     const confirmMessage = "Are you realy want to delete this Driver?";
 
     if (window.confirm(confirmMessage) && id !== undefined) {
-      const driverRes = await fetch(`${config.apiUrl}/load/${id}`, {
+      const driverRes = await fetch(`${config.apiUrl}/driver/${id}`, {
         method: "DELETE",
         credentials: "include",
         headers: {
+          Authorization: `${authToken()}`,
           "Content-Type": "application/json",
         },
       });
