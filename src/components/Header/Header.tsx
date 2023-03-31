@@ -5,6 +5,7 @@ import { config } from "../../utils/config";
 import "./Header.css";
 
 export const Header = () => {
+  const isAuth = useIsAuthenticated();
   const signOut = useSignOut();
 
   //@TODO - this needs to be fixed, auth model needs to be changed
@@ -31,23 +32,28 @@ export const Header = () => {
       <div className="Header glass section-head">
         <h1>CargMan app</h1>
         <div className="menu">
-          <>
-            <button>
-              <Link to="/load">Loads</Link>
-            </button>
-            <button>
-              <Link to="/driver">Drivers </Link>
-            </button>
-          </>
-          <button>
-            <Link to="/" onClick={logout}>
-              Logout
-            </Link>
-          </button>
+          {isAuth() ? (
+            <>
+              <button>
+                <Link to="/load">Loads</Link>
+              </button>
+              <button>
+                <Link to="/driver">Drivers </Link>
+              </button>
+            </>
+          ) : null}
 
-          <Link to="/login">
-            <button className="">🔑</button>
-          </Link>
+          {isAuth() ? (
+            <button>
+              <Link to="/" onClick={logout}>
+                Logout
+              </Link>
+            </button>
+          ) : (
+            <Link to="/login">
+              <button className="">🔑</button>
+            </Link>
+          )}
         </div>
       </div>
     </>

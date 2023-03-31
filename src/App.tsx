@@ -10,12 +10,13 @@ import { ErrorView } from "./components/views/ErrorView";
 import { Login } from "./components/AdminLogin/Login";
 import { AddAdmin } from "./components/AddAdmin/AddAdmin";
 import { AddLoad } from "./components/AddLoad/AddLoad";
-import { useAuthHeader } from "react-auth-kit";
 
 import "./App.css";
+import { useIsAuthenticated } from "react-auth-kit";
 
 function App() {
-  const isAuth = useAuthHeader();
+  const isAuth = useIsAuthenticated();
+
   return (
     <div className="App-box">
       <Header />
@@ -24,18 +25,18 @@ function App() {
         <Route path="/" element={<AddDriver />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<AddAdmin />}></Route>
-
-        <Route path="/driver" element={<DriverList />}></Route>
+        <Route
+          path="/driver"
+          element={isAuth() ? <DriverList /> : null}
+        ></Route>
         <Route path="/driver/add" element={<AddDriver />}></Route>
         <Route
           path="/driver/:singleDriverId"
           element={<SingleDriverView />}
         ></Route>
-
-        <Route path="/load" element={<LoadsList />}></Route>
+        <Route path="/load" element={isAuth() ? <LoadsList /> : null}></Route>
         <Route path="/load/:singleLoadId" element={<SingleLoadView />}></Route>
         <Route path="/load/add" element={<AddLoad />}></Route>
-
         <Route path="*" element={<ErrorView />} />
       </Routes>
     </div>

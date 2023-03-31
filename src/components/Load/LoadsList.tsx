@@ -3,11 +3,12 @@ import { LoadEntity } from "types";
 import { SpinnerLoading } from "../common/SpinnerLoading/SpinnerLoading";
 import { LoadsTable } from "./LoadsTable";
 import { Link } from "react-router-dom";
-import { useAuthHeader } from "react-auth-kit";
+import { useAuthHeader, useIsAuthenticated } from "react-auth-kit";
 import { config } from "../../utils/config";
 
 export const LoadsList = () => {
   const [loadsList, setLoadsList] = useState<LoadEntity[] | null>(null);
+  const isAuth = useIsAuthenticated();
   const authToken = useAuthHeader();
 
   const refreshLoadsList = () => {
@@ -54,6 +55,9 @@ export const LoadsList = () => {
     return <SpinnerLoading />;
   }
 
+  if (isAuth()) {
+  }
+
   return (
     <>
       <div className="section-head">
@@ -62,6 +66,7 @@ export const LoadsList = () => {
           <Link to="/load/add">+Add</Link>
         </p>
       </div>
+
       <div className="box glass">
         <LoadsTable
           loads={loadsList}
