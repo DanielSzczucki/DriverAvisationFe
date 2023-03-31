@@ -4,7 +4,6 @@ import { useFormik } from "formik";
 import { config } from "../../utils/config";
 
 import "./Login.css";
-import { log } from "console";
 
 export const Login = () => {
   const signIn = useSignIn();
@@ -29,14 +28,12 @@ export const Login = () => {
       });
 
       const data = await res.json();
-      console.log("Login data", data);
-
       // sending cookie annd other
       // make auth
       signIn({
         token: data.token.refreshToken,
         refreshToken: data.token.refreshToken,
-        refreshTokenExpireIn: 5,
+        refreshTokenExpireIn: 30,
         expiresIn: 5,
         tokenType: "Bearer",
         //info user
