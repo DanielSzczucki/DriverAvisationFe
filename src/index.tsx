@@ -19,7 +19,7 @@ root.render(
       authName="{_auth}"
       refresh={refreshApi}
       cookieDomain={window.location.hostname}
-      cookieSecure={true}
+      cookieSecure={window.location.protocol === "https:"}
     >
       <BrowserRouter>
         <App />

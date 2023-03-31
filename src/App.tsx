@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { AddDriver } from "./components/AddDriver/AddDriver";
 import { Header } from "./components/Header/Header";
 import { Routes, Route } from "react-router-dom";
-import { AuthProvider } from "./utils/auth";
 import { SingleLoadView } from "./components/views/SingleLoadView";
 import { LoadsList } from "./components/Load/LoadsList";
 import { DriverList } from "./components/Driver/DriversList";
@@ -13,34 +12,45 @@ import { AddAdmin } from "./components/AddAdmin/AddAdmin";
 import { AddLoad } from "./components/AddLoad/AddLoad";
 
 import "./App.css";
+import { AuthProvider, RequireAuth } from "react-auth-kit";
 
 function App() {
   return (
     <div className="App-box">
       <Header />
-      <AuthProvider>
-        <Routes>
-          <Route path="/" element={<AddDriver />}></Route>
-          <Route path="/login" element={<Login />}></Route>
-          <Route path="/register" element={<AddAdmin />}></Route>
 
-          <Route path="/driver" element={<DriverList />}></Route>
-          <Route path="/driver/add" element={<AddDriver />}></Route>
-          <Route
-            path="/driver/:singleDriverId"
-            element={<SingleDriverView />}
-          ></Route>
+      <Routes>
+        <Route path="/" element={<AddDriver />}></Route>
+        <Route path="/login" element={<Login />}></Route>
+        <Route path="/register" element={<AddAdmin />}></Route>
 
-          <Route path="/load" element={<LoadsList />}></Route>
-          <Route
-            path="/load/:singleLoadId"
-            element={<SingleLoadView />}
-          ></Route>
-          <Route path="/load/add" element={<AddLoad />}></Route>
+        <Route
+          path="/driver"
+          element={
+            <RequireAuth loginPath="/login">
+              <DriverList />
+            </RequireAuth>
+          }
+        ></Route>
+        <Route path="/driver/add" element={<AddDriver />}></Route>
+        <Route
+          path="/driver/:singleDriverId"
+          element={<SingleDriverView />}
+        ></Route>
 
-          <Route path="*" element={<ErrorView />} />
-        </Routes>
-      </AuthProvider>
+        <Route
+          path="/load"
+          element={
+            <RequireAuth loginPath="/login">
+              <LoadsList />
+            </RequireAuth>
+          }
+        ></Route>
+        <Route path="/load/:singleLoadId" element={<SingleLoadView />}></Route>
+        <Route path="/load/add" element={<AddLoad />}></Route>
+
+        <Route path="*" element={<ErrorView />} />
+      </Routes>
     </div>
   );
 }
