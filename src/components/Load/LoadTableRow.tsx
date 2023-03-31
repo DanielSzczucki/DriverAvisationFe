@@ -2,10 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import { LoadEntity } from "types";
+import { Button } from "../common/Button/Button";
 
 interface Props {
   load: LoadEntity;
   onLoadChange: () => void;
+  onDelete: (id: string | undefined) => Promise<void>;
 }
 
 export const LoadTableRow = (props: Props) => {
@@ -21,6 +23,9 @@ export const LoadTableRow = (props: Props) => {
         <td>{props.load.units}</td>
         <td>{props.load.quantity}</td>
         <td>{props.load.weight}</td>
+        <td>
+          <Button handleClick={() => props.onDelete(props.load.id)}></Button>
+        </td>
       </tr>
     </>
   );

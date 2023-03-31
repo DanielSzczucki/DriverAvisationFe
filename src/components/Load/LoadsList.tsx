@@ -26,6 +26,23 @@ export const LoadsList = () => {
     })();
   };
 
+  const handleLoadDelete = async (id: string | undefined) => {
+    window.alert("Are you realy want to delete this Load?");
+    if (id !== undefined) {
+      const loadRes = await fetch(`${config.apiUrl}/load/${id}`, {
+        method: "DELETE",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const deletedLoadRes = await loadRes.json();
+      console.log(deletedLoadRes);
+      refreshLoadsList();
+    }
+  };
+
   useEffect(() => {
     refreshLoadsList();
   }, []);
@@ -43,7 +60,11 @@ export const LoadsList = () => {
         </p>
       </div>
       <div className="box glass">
-        <LoadsTable loads={loadsList} onLoadsChange={refreshLoadsList} />
+        <LoadsTable
+          loads={loadsList}
+          onLoadsChange={refreshLoadsList}
+          onDelete={handleLoadDelete}
+        />
       </div>
     </>
   );

@@ -5,6 +5,7 @@ import { LoadTableRow } from "./LoadTableRow";
 interface Props {
   loads: LoadEntity[];
   onLoadsChange: () => void;
+  onDelete: (id: string | undefined) => Promise<void>;
 }
 
 export const LoadsTable = (props: Props) => {
@@ -20,6 +21,7 @@ export const LoadsTable = (props: Props) => {
             <th> Units </th>
             <th> Quantity </th>
             <th> Weight </th>
+            <th> Options </th>
           </tr>
         </thead>
         <tbody>
@@ -28,6 +30,7 @@ export const LoadsTable = (props: Props) => {
               load={load}
               key={load.id}
               onLoadChange={props.onLoadsChange}
+              onDelete={props.onDelete}
             />
           ))}
         </tbody>
