@@ -1,70 +1,64 @@
 import React, { useEffect, useState } from "react";
-import {
-  DriverEntity,
-  GetSingleDriverRes,
-  GetSingleLoadRes,
-  LoadEntity,
-} from "types";
+import { GetSingleDriverRes, GetSingleLoadRes } from "types";
 import { Link, useParams } from "react-router-dom";
 import { useAuthHeader } from "react-auth-kit";
 import { config } from "../../utils/config";
 import { SpinnerLoading } from "../common/SpinnerLoading/SpinnerLoading";
+import { ErrorView } from "./ErrorView";
 
 import "./Views.css";
-
-interface ResData {
-  loadRouter: string;
-  loadList: GetSingleLoadRes[];
-  driverList: GetSingleDriverRes[];
-}
 
 export const SingleDriverView = () => {
   const { singleDriverId } = useParams();
   const authToken = useAuthHeader();
   const [driverInfo, setDriverInfo] = useState<GetSingleDriverRes | null>(null);
-  const [loadInfo, setLoadInfo] = useState<LoadEntity | undefined>(undefined);
+  const [loadInfo, setLoadInfo] = useState<GetSingleLoadRes | null>(null);
 
-  const getDriverData = async () => {
-    const driverResUrl = `${config.apiUrl}/driver/${singleDriverId}`;
+  try {
+    const getDataForDriver = async () => {
+      const driverResUrl = `${config.apiUrl}/driver/${singleDriverId}`;
+      const loadResUrl = `${config.apiUrl}/load/`;
 
-    const driverRes = await fetch(driverResUrl, {
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `${authToken()}`,
-      },
-    });
-
-    const driverResData: GetSingleDriverRes = await driverRes.json();
-
-    setDriverInfo(driverResData);
-  };
-
-  const getLoadData = async (loadId: string) => {
-    const loadResUrl = `${config.apiUrl}/load/`;
-
-    if (loadId) {
-      const resData = await fetch(`${loadResUrl}${loadId}`, {
+      const driverRes = await fetch(driverResUrl, {
+        method: "GET",
         credentials: "include",
         headers: {
-          Content_Type: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `${authToken()}`,
         },
       });
 
-      const loadForDriver = await resData.json();
+      const driverResData: GetSingleDriverRes = await driverRes.json();
+
+      const loadRes = await fetch(
+        `${loadResUrl}${driverResData.driver.loadId}`,
+        {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            Content_Type: "application/json",
+            Authorization: `${authToken()}`,
+          },
+        }
+      );
+
+      const loadForDriver: GetSingleLoadRes = await loadRes.json();
+
+      setDriverInfo(driverResData);
       setLoadInfo(loadForDriver);
-    }
-  };
+    };
 
-  useEffect(() => {
-    getDriverData();
-  }, [singleDriverId]);
+    useEffect(() => {
+      getDataForDriver();
+    }, []);
+  } catch (e) {
+    console.log(e);
+    return <ErrorView />;
+  }
 
-  useEffect(() => {
-    if (driverInfo) {
-      getLoadData(driverInfo.driver.loadId);
-    }
-  }, [driverInfo]);
+  if (!driverInfo) {
+    return <SpinnerLoading />;
+  }
 
   return (
     <>
@@ -79,8 +73,9 @@ export const SingleDriverView = () => {
         <p>Phone: {driverInfo?.driver.phoneNumber}</p>
         <p>Truck: {driverInfo?.driver.truckNumber}</p>
         <p>Trailer: {driverInfo?.driver.trailerNumber}</p>
-        <p>Load Name: {loadInfo?.loadName}</p>
-        <p>Counted given loads: {loadInfo?.count}</p>
+
+        <p>Load Name: {loadInfo?.load.loadName}</p>
+        <p>Counted given loads: {loadInfo?.givenCount}</p>
         <form>
           <label>
             <input type="text" />
@@ -94,6 +89,5 @@ export const SingleDriverView = () => {
   );
 };
 
-//@TODO - add delete option
 //add new Load option
 //@TODO - add math couting for pallets

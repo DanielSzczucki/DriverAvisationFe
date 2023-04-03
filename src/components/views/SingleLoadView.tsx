@@ -1,63 +1,47 @@
 import React, { useEffect, useState } from "react";
-import { DriverEntity, GetSingleDriverRes, GetSingleLoadRes } from "types";
+import { GetSingleDriverRes, GetSingleLoadRes } from "types";
 import { config } from "../../utils/config";
 import { useAuthHeader } from "react-auth-kit";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { SpinnerLoading } from "../common/SpinnerLoading/SpinnerLoading";
-import { ErrorView } from "./ErrorView";
+
+import { fetchData } from "../../utils/fetchData";
 
 export const SingleLoadView = () => {
   const { singleLoadId } = useParams();
   const authToken = useAuthHeader();
-  const [loadInfo, setLoadInfo] = useState<GetSingleLoadRes | null>(null);
-  const [driverInfo, setDriverInfo] = useState<GetSingleDriverRes | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const navigate = useNavigate();
+  const [loadInfo, setLoadInfo] = useState<GetSingleLoadRes | undefined>(
+    undefined
+  );
+  const [driverInfo, setDriverInfo] = useState<GetSingleDriverRes | undefined>(
+    undefined
+  );
 
   useEffect(() => {
-    setIsLoading(true);
     try {
       (async () => {
         const loadResUrl = `${config.apiUrl}/load/${singleLoadId}`;
         const driverResUrl = `${config.apiUrl}/driver/`;
 
-        const loadRes = await fetch(loadResUrl, {
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `${authToken()}`,
-          },
-        });
+        const loadRes = await fetchData(loadResUrl, "GET", `${authToken()}`);
+        const loadResData: GetSingleLoadRes = loadRes;
 
-        const loadResData: GetSingleLoadRes = await loadRes.json();
+        const driverRes = await fetchData(
+          `${driverResUrl}${loadResData.load.driverId}`,
+          "GET",
+          `${authToken()}`
+        );
+        const driverResData: GetSingleDriverRes = driverRes;
+
         setLoadInfo(loadResData);
-
-        if (loadResData.load.driverId) {
-          const driverRes = await fetch(
-            `${driverResUrl}${loadResData.load.driverId}}`,
-            {
-              credentials: "include",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `${authToken()}`,
-              },
-            }
-          );
-
-          const driverResData: GetSingleDriverRes = await driverRes.json();
-          setDriverInfo(driverResData);
-        } else {
-          return null;
-        }
-
-        setIsLoading(false);
+        setDriverInfo(driverResData);
       })();
     } catch (e) {
-      setIsLoading(false);
-      console.error(e);
-      setError(true);
+      console.log(e);
+      navigate("/load");
     }
-  }, [singleLoadId]);
+  }, []);
 
   if (!loadInfo) {
     return <SpinnerLoading />;
@@ -66,15 +50,14 @@ export const SingleLoadView = () => {
   return (
     <>
       <div className="glass views">
-        <h2>{loadInfo?.load.loadName}</h2>
-        <p>Load Id: {loadInfo?.load.id}</p>
-        <p>Sender: {loadInfo?.load.sender}</p>
+        <h2>{loadInfo.load.loadName}</h2>
+        <p>Load Id: {loadInfo.load.id}</p>
+        <p>Sender: {loadInfo.load.sender}</p>
         <p>Recipient: {loadInfo?.load.recipient}</p>
         <p>Frowarder: {loadInfo?.load.forwarder}</p>
         <p>Units: {loadInfo?.load.units}</p>
         <p>Quantity: {loadInfo?.load.quantity}</p>
         <p>Weight: {loadInfo?.load.weight}</p>
-
         <p>
           Driver: {driverInfo?.driver.name ?? "not sign"}
           {driverInfo?.driver.lastName ?? "not sign"}
@@ -91,6 +74,5 @@ export const SingleLoadView = () => {
   );
 };
 
-//@TODO - add delete option
 //add new Load option
 // @TODO take and save data to one container and find better hook: useMemo?
