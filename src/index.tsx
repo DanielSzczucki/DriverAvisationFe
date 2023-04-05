@@ -17,7 +17,6 @@ root.render(
     <AuthProvider
       authType={"cookie"}
       authName="{_auth}"
-      refresh={refreshApi}
       cookieDomain={window.location.hostname}
       cookieSecure={window.location.protocol === "https:"}
     >
