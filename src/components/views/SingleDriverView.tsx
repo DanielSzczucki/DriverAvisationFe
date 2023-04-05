@@ -4,9 +4,15 @@ import { Link, useParams } from "react-router-dom";
 import { useAuthHeader } from "react-auth-kit";
 import { config } from "../../utils/config";
 import { SpinnerLoading } from "../common/SpinnerLoading/SpinnerLoading";
+import { fetchData } from "../../utils/fetchData";
 import { ErrorView } from "./ErrorView";
 
 import "./Views.css";
+
+interface GetDriverResStatus {
+  message: string;
+  driver: CreateDriverReq;
+}
 
 export const SingleDriverView = () => {
   const { singleDriverId } = useParams();
@@ -38,33 +44,20 @@ export const SingleDriverView = () => {
       const driverResUrl = `${config.apiUrl}/driver/${singleDriverId}`;
       const loadResUrl = `${config.apiUrl}/load/`;
 
-      const driverRes = await fetch(driverResUrl, {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `${authToken()}`,
-        },
-      });
-      const driverResData: GetSingleDriverRes = await driverRes.json();
+      const driverRes = fetchData(driverResUrl, "GET", authToken());
+      const driverResData: GetDriverResStatus = await driverRes;
 
-      const loadRes = await fetch(
+      const loadRes = fetchData(
         `${loadResUrl}${driverResData.driver.loadId}`,
-        {
-          method: "GET",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `${authToken()}`,
-          },
-        }
+        "GET",
+        authToken()
       );
 
-      const loadForDriver: GetSingleLoadRes = await loadRes.json();
+      const loadForDriver: GetSingleLoadRes = await loadRes;
 
       setDriverInfo(driverResData);
       setForm({ ...driverResData.driver });
-
+      setResultInfo(driverResData.message);
       setLoadInfo(loadForDriver);
     };
 
@@ -80,16 +73,14 @@ export const SingleDriverView = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch(`${config.apiUrl}/driver/${singleDriverId}`, {
-        method: "PUT",
-        credentials: "include",
-        headers: {
-          Authorization: `${authToken()}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(form),
-      });
-      const updatedDriver = await res.json();
+      const driverUpdateRes = fetchData(
+        `${config.apiUrl}/driver/${singleDriverId}`,
+        "PUT",
+        authToken(),
+        form
+      );
+
+      const updatedDriver = await driverUpdateRes;
       console.log(updatedDriver);
 
       setResultInfo(`${updatedDriver.message}`);
@@ -118,7 +109,7 @@ export const SingleDriverView = () => {
           </p>
 
           <p>
-            Driver Id: <span>{driverInfo.driver.id}</span>{" "}
+            Driver Id: <span>{driverInfo.driver.id}</span>
           </p>
           <p>
             Load Name: <span>{loadInfo?.load.loadName}</span>
