@@ -5,12 +5,12 @@
   max-width: 1200px;
   width: 96%;
   margin: 0% auto;
-  padding: 4%;
+  padding: 2%;
 }
 
 .addForm h2 {
   padding: 0;
-  margin: 0;
+  margin-bottom: 2%;
 }
 
 .addFrom label {
@@ -22,7 +22,7 @@
 .addForm button {
   width: 100%;
   margin: 2% auto;
-  padding: 2% 2%;
+  padding: 1% 2%;
   font-size: 1.3rem;
   background: var(--color-background-middle);
   border-radius: 10px;
@@ -38,6 +38,9 @@
   margin: 20px auto;
   padding: 2% 4%;
   width: 100%;
+}
+.addForm span {
+  color: var(--color-text-contrast);
 }
 
 .loadLabel {

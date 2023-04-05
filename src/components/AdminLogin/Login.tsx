@@ -31,7 +31,7 @@ export const Login = () => {
       // sending cookie annd other
       // make auth
       signIn({
-        token: data.token.refreshToken,
+        token: data.token.token,
         refreshToken: data.token.refreshToken,
         refreshTokenExpireIn: 30,
         expiresIn: 5,

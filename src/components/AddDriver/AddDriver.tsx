@@ -122,7 +122,7 @@ export const AddDriver = () => {
 
           <br />
           <label>
-            Reference Number (12 signs: xxx-xxxx-xxx) : <br />
+            Reference Number (12 signs) : <br />
             <input
               type="text"
               value={form.referenceNumber}
