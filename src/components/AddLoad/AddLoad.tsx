@@ -4,6 +4,7 @@ import { SpinnerLoading } from "../common/SpinnerLoading/SpinnerLoading";
 import { Link, redirect, useNavigate } from "react-router-dom";
 import { config } from "../../utils/config";
 import { useAuthHeader } from "react-auth-kit";
+import { fetchData } from "../../utils/fetchData";
 
 export const AddLoad = () => {
   const [form, setForm] = useState<CreateLoadReq>({
@@ -37,19 +38,19 @@ export const AddLoad = () => {
     setLoading(true);
     //${config.apiUrl}/load
     try {
-      const res = await fetch(`${config.apiUrl}/load`, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          Authorization: `${authToken()}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(form),
-      });
-      const data: LoadEntity = await res.json();
+      const addLoadRes = fetchData(
+        `${config.apiUrl}/load`,
+        "POST",
+        authToken(),
+        form
+      );
+
+      const loadResData: LoadEntity = await addLoadRes;
 
       setLoading(false);
-      setResultInfo(`${data.loadName} added with ref: ${data.referenceNumber}`);
+      setResultInfo(
+        `${loadResData.loadName} added with ref: ${loadResData.referenceNumber}`
+      );
 
       setTimeout(() => {
         navigate("/load");
@@ -129,7 +130,7 @@ export const AddLoad = () => {
             />
           </label>
           <br />
-          <label className="loadLabel">
+          <label className="">
             Units: <br />
             <select
               value={form.units}
