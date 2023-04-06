@@ -7,10 +7,8 @@ interface Props {
   message: React.ReactNode;
 }
 
-export const Popup = (props: Props) => {
-  if (!props.isVisible) return null;
-
-  return (
+export const Popup = (props: Props) =>
+  props.isVisible ? (
     <>
       <div className="overlay glass">
         <div className="popupContainer">
@@ -23,5 +21,4 @@ export const Popup = (props: Props) => {
         </div>
       </div>
     </>
-  );
-};
+  ) : null;
