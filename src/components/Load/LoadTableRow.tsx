@@ -15,16 +15,20 @@ export const LoadTableRow = (props: Props) => {
     <>
       <tr>
         <td>
-          <Link to={`/load/${props.load.id}`}>{props.load.loadName}</Link>
+          <Link to={`/load/${props.load.id}`}>
+            {props.load.referenceNumber}
+          </Link>
         </td>
-        <td>{props.load.referenceNumber}</td>
         <td>{props.load.sender}</td>
         <td>{props.load.recipient}</td>
         <td>{props.load.units}</td>
         <td>{props.load.quantity}</td>
         <td>{props.load.weight}</td>
         <td>
-          <Button handleClick={() => props.onDelete(props.load.id)}></Button>
+          <Button
+            buttonValue="❌"
+            handleClick={() => props.onDelete(props.load.id)}
+          ></Button>
         </td>
       </tr>
     </>

@@ -29,8 +29,10 @@
 }
 
 .table {
-  width: 96vw;
+  width: 96%;
   max-width: 1200px;
+  font-size: 1rem;
+  overflow-wrap: break-word;
   text-transform: uppercase;
 }
 
@@ -90,6 +92,6 @@ td:first-child {
 
   th,
   td {
-    font-size: 0.7rem;
+    font-size: 0.5rem;
   }
 }

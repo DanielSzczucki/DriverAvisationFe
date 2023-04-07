@@ -14,7 +14,7 @@ export const LoadsTable = (props: Props) => {
       <table className="table">
         <thead>
           <tr>
-            <th> Load name </th>
+            {/* <th> Load name </th> */}
             <th> Reference </th>
             <th> Sender </th>
             <th> Recipient </th>

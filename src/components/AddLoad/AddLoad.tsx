@@ -80,11 +80,13 @@ export const AddLoad = () => {
   return (
     <>
       <main className="hide-scrollbar">
-        <form className="box-size glass addForm" onSubmit={sendForm}>
+        <header className="Header">
           <h2>Load Registration</h2>
-          <br />
+        </header>
+
+        <form className="box-size glass addForm" onSubmit={sendForm}>
           <label>
-            Referenc number: (12 signs) <br />
+            Referenc number: (12 signs)
             <input
               required
               type="text"
@@ -93,45 +95,45 @@ export const AddLoad = () => {
               minLength={12}
             />
           </label>
-          <br />
+
           <label>
-            Load Name: <br />
+            Load Name:
             <input
               type="text"
               value={form.loadName}
               onChange={(e) => updateForm("loadName", e.target.value)}
             />
           </label>
-          <br />
+
           <label>
-            Sender: <br />
+            Sender:
             <input
               type="text"
               value={form.sender}
               onChange={(e) => updateForm("sender", e.target.value)}
             />
           </label>
-          <br />
+
           <label>
-            Recipient: <br />
+            Recipient:
             <input
               type="text"
               value={form.recipient}
               onChange={(e) => updateForm("recipient", e.target.value)}
             />
           </label>
-          <br />
+
           <label>
-            Forwarder: <br />
+            Forwarder:
             <input
               type="text"
               value={form.forwarder}
               onChange={(e) => updateForm("forwarder", e.target.value)}
             />
           </label>
-          <br />
-          <label className="">
-            Units: <br />
+
+          <label>
+            Units:
             <select
               value={form.units}
               onChange={(e) => updateForm("units", e.target.value)}
@@ -142,9 +144,9 @@ export const AddLoad = () => {
               <option>{Units[Units.ldm]}</option>
             </select>
           </label>
-          <br />
+
           <label>
-            Quantity: <br />
+            Quantity:
             <input
               required
               type="text"
@@ -152,9 +154,9 @@ export const AddLoad = () => {
               onChange={(e) => updateForm("quantity", e.target.value)}
             />
           </label>
-          <br />
+
           <label>
-            Weight: <br />
+            Weight:
             <input
               required
               type="text"
@@ -163,18 +165,15 @@ export const AddLoad = () => {
               minLength={1}
             />
           </label>
-          <br />
 
           <label>
-            Driver Id: <br />
+            Driver Id:
             <input
               value={form.driverId}
               onChange={(e) => updateForm("driverId", e.target.value)}
             />
           </label>
-          <br />
 
-          <br />
           <button type="submit">Add</button>
         </form>
       </main>

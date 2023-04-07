@@ -90,20 +90,21 @@ export const AddDriver = () => {
   return (
     <>
       <main className="hide-scrollbar">
-        <form className=" box-size glass addForm" onSubmit={sendForm}>
+        <header className="Header">
           <h2>Driver registration</h2>
-          <br />
+        </header>
+        <form className=" box-size glass addForm" onSubmit={sendForm}>
           <label>
-            Name: <br />
+            Name:
             <input
               type="text"
               value={form.name}
               onChange={(e) => updateForm("name", e.target.value)}
             />
           </label>
-          <br />
+
           <label>
-            Last Name: <br />
+            Last Name:
             <input
               type="text"
               value={form.lastName}
@@ -120,9 +121,8 @@ export const AddDriver = () => {
             />
           </label>
 
-          <br />
           <label>
-            Reference Number (12 signs) : <br />
+            Reference Number (12 signs) :
             <input
               type="text"
               value={form.referenceNumber}
@@ -131,35 +131,34 @@ export const AddDriver = () => {
               minLength={12}
             />
           </label>
-          <br />
 
           <label>
-            Your Company Name: <br />
+            Your Company Name:
             <input
               type="text"
               value={form.companyName}
               onChange={(e) => updateForm("companyName", e.target.value)}
             />
           </label>
-          <br />
+
           <label>
-            Truck Number: <br />
+            Truck Number:
             <input
               type="text"
               value={form.truckNumber}
               onChange={(e) => updateForm("truckNumber", e.target.value)}
             />
           </label>
-          <br />
+
           <label>
-            Trailer Number: <br />
+            Trailer Number:
             <input
               type="text"
               value={form.trailerNumber}
               onChange={(e) => updateForm("trailerNumber", e.target.value)}
             />
           </label>
-          <br />
+
           <label className="loadLabel">
             Loading/Unloading:
             <select
@@ -171,7 +170,7 @@ export const AddDriver = () => {
               <option>unloading</option>
             </select>
           </label>
-          <br />
+
           <button type="submit">Register</button>
         </form>
       </main>

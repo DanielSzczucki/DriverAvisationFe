@@ -118,11 +118,13 @@ export const SingleDriverView = () => {
         />
       ) : (
         <main className="hide-scrollbar">
-          <form className="box-size glass addForm" onSubmit={sendForm}>
+          <header className="Header">
             <h2>Driver info & edit form</h2>
+          </header>
 
+          <form className="box-size glass addForm" onSubmit={sendForm}>
             <p>
-              Driver:
+              Driver:{""}
               <span>
                 {driverInfo?.driver.name} {driverInfo?.driver.lastName}
               </span>

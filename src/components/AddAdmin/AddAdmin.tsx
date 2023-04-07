@@ -65,7 +65,7 @@ export const AddAdmin = () => {
         message={message}
       />
 
-      <header className="section-head">
+      <header className="Header">
         <h2>User registration form</h2>
       </header>
       <div className="box glass addForm">

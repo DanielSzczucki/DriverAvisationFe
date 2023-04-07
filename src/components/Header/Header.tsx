@@ -30,7 +30,7 @@ export const Header = () => {
   return (
     <>
       <div className="Header glass section-head">
-        <h1>CargMan app</h1>
+        <h1>SimpleCargo app</h1>
         <div className="menu">
           {isAuth() ? (
             <>

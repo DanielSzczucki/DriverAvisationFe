@@ -9,11 +9,13 @@
 }
 
 .addForm h2 {
+  font-size: 2rem;
   padding: 0;
   margin-bottom: 2%;
 }
 
 .addFrom label {
+  font-size: 1.3rem;
   font-weight: bold;
 }
 
@@ -24,7 +26,7 @@
   width: 100%;
   margin: 2% auto;
   padding: 1% 2%;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   background: var(--color-background-middle);
   border-radius: 10px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -57,13 +59,13 @@
 
 .loadLabel {
   display: flex;
-  padding-top: 1%;
+  align-items: center;
 }
 
 .loadLabel select {
-  margin-left: 2%;
-  width: 100%;
-  padding: 1% 2%;
+  margin-left: 1%;
+  width: 90%;
+  padding: 1% 1%;
   font-size: 1.2rem;
   border-radius: 10px;
   background: var(--color-background-dark);
@@ -80,4 +82,17 @@ main {
 main::-webkit-scrollbar {
   display: none;
   -ms-overflow-style: none;
+}
+
+@media (max-width: 480px) {
+  .addForm input,
+  .addForm textarea,
+  .addForm button,
+  .addForm select {
+    font-size: 1rem;
+  }
+
+  .loadLabel select {
+    font-size: 1rem;
+  }
 }

@@ -66,3 +66,17 @@ article::-webkit-scrollbar {
   display: none;
   -ms-overflow-style: none;
 }
+
+@media (max-width: 480px) {
+  .addForm input,
+  .addForm textarea,
+  .addForm button,
+  .addForm select,
+  .addForm select option {
+    font-size: 0.8rem;
+  }
+
+  .loadLabel select {
+    font-size: 0.8rem;
+  }
+}
