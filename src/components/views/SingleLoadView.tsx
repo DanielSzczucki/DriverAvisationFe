@@ -123,16 +123,30 @@ export const SingleLoadView = () => {
         />
       ) : (
         <main className="hide-scrollbar">
-          <form className=" box-size glass addForm" onSubmit={sendForm}>
+          <header className="Header">
             <h2>Load info & edit form</h2>
-            <p>Load Id: {loadInfo.load.id}</p>
+          </header>
+
+          <form className=" box-size glass addForm" onSubmit={sendForm}>
             <p>
-              Driver: {driverInfo?.driver.name ?? "not sign"}
-              {driverInfo?.driver.lastName ?? "not sign"}
+              Load Id: <span>{loadInfo.load.id}</span>
             </p>
-            <p>Truck: {driverInfo?.driver.truckNumber ?? "not sign"}</p>
-            <p>Trailer: {driverInfo?.driver.trailerNumber ?? "not sign"}</p>
-            <label>
+            <p>
+              Driver:{" "}
+              <span>
+                {driverInfo?.driver.name ?? "not sign"}{" "}
+                {driverInfo?.driver.lastName ?? "not sign"}
+              </span>
+            </p>
+            <p>
+              Truck: <span>{driverInfo?.driver.truckNumber ?? "not sign"}</span>
+            </p>
+            <p>
+              Trailer:{" "}
+              <span> {driverInfo?.driver.trailerNumber ?? "not sign"}</span>
+            </p>
+            <br />
+            <label className="">
               Driver id:
               <select
                 value={form.driverId}
@@ -141,7 +155,7 @@ export const SingleLoadView = () => {
                 <option>{form.driverId}</option>
               </select>
             </label>
-            <br />
+
             <label>
               Sender:
               <input
