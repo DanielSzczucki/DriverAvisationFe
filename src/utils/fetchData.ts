@@ -13,14 +13,14 @@ export interface FetchFunctionArg {
   url: string;
   fetchMethod: string;
   authToken: string;
-  body?: CreateDriverReq | CreateLoadReq;
+  body?: CreateDriverReq | CreateLoadReq | number | string;
 }
 
 export const fetchData = async (
   url: string,
   fetchMethod: string,
   authToken: string,
-  body?: CreateDriverReq | CreateLoadReq
+  body?: CreateDriverReq | CreateLoadReq | number | string
 ) => {
   const data = await fetch(url, {
     method: `${fetchMethod}`,
