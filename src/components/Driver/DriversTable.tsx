@@ -7,6 +7,10 @@ interface Props {
   driversList: DriverEntity[];
   loadsList: LoadEntity[];
   onDelete: (id: string | undefined) => Promise<void>;
+  onDockSend: (
+    id: string | undefined,
+    dock: number | undefined
+  ) => Promise<void>;
 }
 
 export const DriversTable = (props: Props) => {
@@ -18,8 +22,9 @@ export const DriversTable = (props: Props) => {
             <th> Driver name </th>
             <th> Reference </th>
             <th> Truck No.</th>
-            <th> Trailer No. </th>
+            {/* <th> Trailer No. </th> */}
             <th> Load id </th>
+            <th> Dock </th>
             <th> Options </th>
           </tr>
         </thead>
@@ -30,6 +35,7 @@ export const DriversTable = (props: Props) => {
               key={driver.id}
               loadsList={props.loadsList}
               onDelete={props.onDelete}
+              onDockSend={props.onDockSend}
             />
           ))}
         </tbody>

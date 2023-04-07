@@ -3,11 +3,16 @@ import { DriverEntity, LoadEntity } from "types";
 import { Button } from "../common/Button/Button";
 
 import "./Table.css";
+import { SmsDockNotification } from "../SmsDockNotification/SmsDockNotification";
 
 interface Props {
   driver: DriverEntity;
   loadsList: LoadEntity[];
   onDelete: (id: string | undefined) => Promise<void>;
+  onDockSend: (
+    id: string | undefined,
+    dock: number | undefined
+  ) => Promise<void>;
 }
 
 export const DriverTableRow = (props: Props) => {
@@ -21,11 +26,20 @@ export const DriverTableRow = (props: Props) => {
         <td>{props.driver.referenceNumber}</td>
         {/* <td>{props.driver.companyName}</td> */}
         <td>{props.driver.truckNumber}</td>
-        <td>{props.driver.trailerNumber}</td>
+        {/* <td>{props.driver.trailerNumber}</td> */}
         {/* <td>{props.driver.loadingUnloading}</td> */}
         <td>{props.driver.loadId}</td>
         <td>
-          <Button handleClick={() => props.onDelete(props.driver.id)}></Button>
+          <SmsDockNotification
+            onDockSend={props.onDockSend}
+            driverId={props.driver.id}
+          />
+        </td>
+        <td>
+          <Button
+            buttonValue="❌"
+            handleClick={() => props.onDelete(props.driver.id)}
+          ></Button>
         </td>
       </tr>
     </>
