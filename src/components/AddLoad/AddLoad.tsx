@@ -21,10 +21,10 @@ export const AddLoad = () => {
     driverId: "",
   });
 
-  const [loading, setLoading] = useState<boolean>(false);
-  const [resultInfo, setResultInfo] = useState<string | null>(null);
   const navigate = useNavigate();
   const authToken = useAuthHeader();
+  const [loading, setLoading] = useState<boolean>(false);
+  const [resultInfo, setResultInfo] = useState<string | null>(null);
 
   const updateForm = (key: string, value: any) => {
     setForm((form) => ({
@@ -36,7 +36,7 @@ export const AddLoad = () => {
   const sendForm = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    //${config.apiUrl}/load
+
     try {
       const addLoadRes = fetchData(
         `${config.apiUrl}/load`,

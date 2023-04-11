@@ -7,12 +7,9 @@ import "./AddDriver.css";
 import { useNavigate } from "react-router-dom";
 import { ErrorView } from "../views/ErrorView";
 import { useAuthHeader } from "react-auth-kit";
+import { fetchData } from "../../utils/fetchData";
 
 export const AddDriver = () => {
-  const navigate = useNavigate();
-  const authToken = useAuthHeader();
-  const [error, setError] = useState(false);
-
   const [form, setForm] = useState<CreateDriverReq>({
     name: "",
     lastName: "",
@@ -25,6 +22,9 @@ export const AddDriver = () => {
     loadId: "",
   });
 
+  const navigate = useNavigate();
+  const authToken = useAuthHeader();
+  const [error, setError] = useState(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [resultInfo, setResultInfo] = useState<string | null>(null);
 
@@ -42,29 +42,26 @@ export const AddDriver = () => {
     try {
       setLoading(true);
 
-      const res = await fetch(`${config.apiUrl}/driver`, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          Authorization: `${authToken()}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(form),
-      });
-      const data: DriverEntity = await res.json();
+      const addDriverRes = fetchData(
+        `${config.apiUrl}/driver`,
+        "POST",
+        authToken(),
+        form
+      );
+
+      const driverResData: DriverEntity = await addDriverRes;
+      console.log("Driver Data", driverResData);
 
       setLoading(false);
-
-      setResultInfo(`${data.name} added with ref: ${data.referenceNumber}`);
-
-      console.log(data);
+      setResultInfo(
+        `${driverResData.name} added with ref: ${driverResData.referenceNumber}`
+      );
 
       setTimeout(() => {
         navigate("/");
       }, 3000);
     } finally {
       setLoading(false);
-      setError(true);
     }
   };
 
@@ -83,16 +80,13 @@ export const AddDriver = () => {
     );
   }
 
-  if (error) {
-    return <ErrorView />;
-  }
-
   return (
     <>
       <main className="hide-scrollbar">
         <header className="Header">
           <h2>Driver registration</h2>
         </header>
+
         <form className=" box-size glass addForm" onSubmit={sendForm}>
           <label>
             Name:
@@ -113,7 +107,7 @@ export const AddDriver = () => {
           </label>
           <br />
           <label>
-            Phone Number: <br />
+            Phone Number `(0048798798798)`: <br />
             <input
               type="text"
               value={form.phoneNumber}
