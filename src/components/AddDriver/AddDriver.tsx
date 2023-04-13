@@ -113,7 +113,7 @@ export const AddDriver = () => {
           </label>
           <br />
           <label>
-            Phone Number: <br />
+            Phone Number (0048999999999): <br />
             <input
               type="text"
               value={form.phoneNumber}
