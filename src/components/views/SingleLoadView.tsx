@@ -43,7 +43,7 @@ export const SingleLoadView = () => {
     weight: 0,
     count: 0,
     startDate: "",
-    driverId: "",
+    driverId: " ",
   });
   const [isFormChanged, setIsFormChanged] = useState<boolean>(false);
   const [isPopupVisible, setIsPopupVisible] = useState<boolean>(false);
@@ -56,8 +56,7 @@ export const SingleLoadView = () => {
 
       //take load data
       const loadRes = await fetchData(loadResUrl, "GET", `${authToken()}`);
-
-      const loadResData: GetSingleLoadRes = loadRes;
+      const loadResData: GetSingleLoadRes = await loadRes;
 
       //set driver id from load
       const driverId = loadRes.load.driverId;
@@ -95,10 +94,6 @@ export const SingleLoadView = () => {
     }
   };
 
-  useEffect(() => {
-    getDataForLoad();
-  }, []);
-
   const updateForm = (key: string, value: any) => {
     setForm((form) => ({
       ...form,
@@ -109,7 +104,6 @@ export const SingleLoadView = () => {
 
   const sendForm = async (e: FormEvent) => {
     e.preventDefault();
-
     try {
       const loadUpdateRes = fetchData(
         `${config.apiUrl}/load/${singleLoadId}`,
@@ -134,6 +128,10 @@ export const SingleLoadView = () => {
       }, 4000);
     }
   };
+
+  useEffect(() => {
+    getDataForLoad();
+  }, []);
 
   if (!loadInfo) {
     return <SpinnerLoading />;
@@ -177,15 +175,14 @@ export const SingleLoadView = () => {
           <label className="loadLabel">
             Driver id:
             <select
-              value={form.driverId}
+              value={form.driverId || "Not assigned"}
               onChange={(e) => updateForm("driverId", e.target.value)}
             >
-              <option>{form.driverId}</option>
+              <option>{form.driverId || "Not assigned"}</option>
               {allDriversData?.map((driver) => (
-                <option
-                  key={driver.id}
-                  value={driver.id}
-                >{`${driver.name} ${driver.lastName} ${driver.companyName}`}</option>
+                <option key={driver.id} value={driver.id || "Not assigned"}>
+                  {`${driver.name} ${driver.lastName} ${driver.companyName}`}
+                </option>
               ))}
             </select>
           </label>
