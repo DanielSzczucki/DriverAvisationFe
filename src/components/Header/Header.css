@@ -7,16 +7,18 @@
   justify-content: center;
   align-items: center;
   width: 96%;
-  min-height: 10vh;
-  margin: 1% auto;
-  padding: 1% auto;
+  height: 8vh;
+  min-height: 70px;
+  margin: 1% 2%;
+  padding: 1%;
   font-size: 1.2rem;
+  text-decoration: none;
 }
 
 .Header h1 {
-  padding: 2%;
   margin: 2%;
 }
+
 .Header h2 {
   font-size: 2rem;
   padding: 0;
@@ -33,6 +35,15 @@
   -webkit-backdrop-filter: blur(8.1px);
   backdrop-filter: blur(8.1px);
   border: 1px solid var(--color-background-dark);
+  color: var(--color-text-contrast);
+  text-decoration: none;
+}
+.Header button:hover {
+  background: var(--color-background-contrast);
+}
+
+.Header button a {
+  text-decoration: none;
   color: var(--color-text-contrast);
 }
 

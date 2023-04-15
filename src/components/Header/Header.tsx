@@ -29,8 +29,9 @@ export const Header = () => {
 
   return (
     <>
-      <div className="Header glass section-head">
+      <div className="Header glass">
         <h1>SimpleCargo app</h1>
+
         <div className="menu">
           {isAuth() ? (
             <>
