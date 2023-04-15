@@ -8,6 +8,11 @@ import { useNavigate } from "react-router-dom";
 import { ErrorView } from "../views/ErrorView";
 import { useAuthHeader } from "react-auth-kit";
 
+interface addDriverResStatus {
+  driverRouter: string;
+  assignedDriver: DriverEntity;
+}
+
 export const AddDriver = () => {
   const navigate = useNavigate();
   const authToken = useAuthHeader();
@@ -51,13 +56,13 @@ export const AddDriver = () => {
         },
         body: JSON.stringify(form),
       });
-      const data: DriverEntity = await res.json();
+      const data: addDriverResStatus = await res.json();
+
+      setResultInfo(
+        `${data.assignedDriver.name} added with ref: ${data.assignedDriver.referenceNumber}, Status: ${data.driverRouter}`
+      );
 
       setLoading(false);
-
-      setResultInfo(`${data.name} added with ref: ${data.referenceNumber}`);
-
-      console.log(data);
 
       setTimeout(() => {
         navigate("/");
