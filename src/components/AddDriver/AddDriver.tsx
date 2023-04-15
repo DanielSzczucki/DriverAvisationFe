@@ -82,7 +82,7 @@ export const AddDriver = () => {
 
   return (
     <>
-      <main className="hide-scrollbar">
+      <main className="hide-scrollbar ">
         <header className="Header">
           <h2>Driver registration</h2>
         </header>
@@ -107,7 +107,7 @@ export const AddDriver = () => {
           </label>
           <br />
           <label>
-            Phone Number `(0048798798798)`: <br />
+            Phone Number (0048999999999): <br />
             <input
               type="text"
               value={form.phoneNumber}

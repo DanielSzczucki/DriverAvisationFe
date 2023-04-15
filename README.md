@@ -1,5 +1,10 @@
 # SimpleCargo App FE
 
+Logging and authorization should be added.
+Add css
+
+# SimpleCargo App FE
+
 The SimpleCargo App project is a frontend layer of a web application for managing drivers and cargoes.
 
 ### Technologies used to create the application:
@@ -10,12 +15,17 @@ Link to the backend API: [DanielSzczucki/DriverAvisationBe (github.com)](https:/
 
 ### Proposed usage map:
 
-1.  Register your application user: key > user registration.
-2.  Add your load and remember the reference number: Header > Load
-3.  Add your driver. You can do this as an application user or log out and add it through the driver registration form. Provide a valid phone number in the format 0048000000000.
-4.  The application will assign the driver to the load.
-5.  Log in to the application, find your driver on the driver list, assign them to the dock, and confirm. Inform the driver to come to the chosen ramp.
-6.  Delete your driver.
+1. Register your application user: key > user registration.
+
+2. Add your load and remember the reference number: Header > Load
+
+3. Add your driver. You can do this as an application user or log out and add it through the driver registration form. Provide a valid phone number in the format 0048000000000.
+
+4. The application will assign the driver to the load.
+
+5. Log in to the application, find your driver on the driver list, assign them to the dock, and confirm. Inform the driver to come to the chosen ramp.
+
+6. Delete your driver.
 
 ## Features
 
@@ -69,7 +79,9 @@ The application allows the user to notify a driver of the need to pick up or dro
 ### Data Editing and Display Modules
 
 **components > views > SingleDriverView**
+
 **components > views > SingleLoadView **
+
 The application stores and allows the user to edit driver and load data such as: sender, recipient, driver, carrier, quantity, weight, type, reference number, tractor and trailer registration numbers.
 
 ### Confirmation and Error Information
@@ -90,12 +102,17 @@ Link do backendowego API: [DanielSzczucki/DriverAvisationBe (github.com)](https:
 
 ### Proponowana mapa użytkowania:
 
-1.  Zarejestruj swojego użytkownika aplikacji: kluczyk > rejestracja użytkownika.
-2.  Dodaj swój ładunek i zapamiętaj numer referencyjny: nagłówek > ładunek
-3.  Dodaj swojego kierowcę. Możesz to zrobić jako użytkownik aplikacji lub wylogować się i dodać kierowcę za pomocą formularza rejestracji. Podaj poprawny numer telefonu w formacie 0048000000000.
-4.  Aplikacja przypisze kierowcę do ładunku.
-5.  Zaloguj się do aplikacji, na liście kierowców znajdź swojego kierowcę, przypisz mu doczek i zatwierdź. Powiadom kierowcę, aby podjechał pod wybraną rampę.
-6.  Usuń swojego kierowcę.
+1. Zarejestruj swojego użytkownika aplikacji: kluczyk > rejestracja użytkownika.
+
+2. Dodaj swój ładunek i zapamiętaj numer referencyjny: nagłówek > ładunek
+
+3. Dodaj swojego kierowcę. Możesz to zrobić jako użytkownik aplikacji lub wylogować się i dodać kierowcę za pomocą formularza rejestracji. Podaj poprawny numer telefonu w formacie 0048000000000.
+
+4. Aplikacja przypisze kierowcę do ładunku.
+
+5. Zaloguj się do aplikacji, na liście kierowców znajdź swojego kierowcę, przypisz mu doczek i zatwierdź. Powiadom kierowcę, aby podjechał pod wybraną rampę.
+
+6. Usuń swojego kierowcę.
 
 ## Funkcjonalności
 

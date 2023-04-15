@@ -1,10 +1,14 @@
 @import "../../styles/variables.css";
 
+.formBox {
+  max-width: 800px;
+}
+
 .addForm,
 .good-box {
-  max-width: 1200px;
+  /* max-width: 1200px; */
   width: 96%;
-  margin: 0% auto;
+  margin: 2% auto;
   padding: 2%;
 }
 
