@@ -7,6 +7,7 @@ import { SpinnerLoading } from "../common/SpinnerLoading/SpinnerLoading";
 import { fetchData } from "../../utils/fetchData";
 
 import { Popup } from "../common/Popup/Popup";
+import { ErrorView } from "./ErrorView";
 
 interface GetLoadResStatus {
   message: string;
@@ -65,13 +66,9 @@ export const SingleLoadView = () => {
       setForm({ ...loadResData.load });
 
       //take all drivers data
-      const driversRes = await fetchData(
-        driversResUrl,
-        "GET",
-        `${authToken()}`
-      );
+      const driversRes = await fetchData(driversResUrl, "GET", authToken());
       //all drivers data
-      const driversResData: GetDriverResStatus = driversRes;
+      const driversResData: GetDriverResStatus = await driversRes;
 
       // find one driver if driverId exist in selected load
       if (driverId) {
@@ -87,7 +84,7 @@ export const SingleLoadView = () => {
       return (
         <Popup
           isVisible={true}
-          message={"Cant download all load data"}
+          message={"Something went wrong :("}
           onClose={() => setIsPopupVisible(false)}
         />
       );
@@ -113,20 +110,19 @@ export const SingleLoadView = () => {
       );
 
       const updatedLoad: GetLoadResStatus = await loadUpdateRes;
-
       setResultInfo(updatedLoad.message);
 
       setIsPopupVisible(true);
+      //reset form button status
       setIsFormChanged(false);
+      //reload load form data
       getDataForLoad();
     } catch (e) {
-      //popup shows bad message from sendForm > updateLoad.message
-      setIsPopupVisible(true);
-
       setTimeout(() => {
         navigate("/load");
       }, 4000);
     }
+    return <ErrorView />;
   };
 
   useEffect(() => {
@@ -185,6 +181,16 @@ export const SingleLoadView = () => {
                 </option>
               ))}
             </select>
+          </label>
+
+          <label>
+            Reference number:
+            <input
+              required
+              type="text"
+              value={form.referenceNumber}
+              onChange={(e) => updateForm("referenceNumber", e.target.value)}
+            />
           </label>
 
           <label>
