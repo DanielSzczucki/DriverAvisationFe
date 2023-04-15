@@ -7,7 +7,11 @@ import "./AddDriver.css";
 import { useNavigate } from "react-router-dom";
 import { ErrorView } from "../views/ErrorView";
 import { useAuthHeader } from "react-auth-kit";
-import { fetchData } from "../../utils/fetchData";
+
+interface addDriverResStatus {
+  driverRouter: string;
+  assignedDriver: DriverEntity;
+}
 
 export const AddDriver = () => {
   const [form, setForm] = useState<CreateDriverReq>({
@@ -42,20 +46,22 @@ export const AddDriver = () => {
     try {
       setLoading(true);
 
-      const addDriverRes = fetchData(
-        `${config.apiUrl}/driver`,
-        "POST",
-        authToken(),
-        form
-      );
+      const res = await fetch(`${config.apiUrl}/driver`, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          Authorization: `${authToken()}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+      const data: addDriverResStatus = await res.json();
 
-      const driverResData: DriverEntity = await addDriverRes;
-      console.log("Driver Data", driverResData);
+      setResultInfo(
+        `${data.assignedDriver.name} added with ref: ${data.assignedDriver.referenceNumber}, Status: ${data.driverRouter}`
+      );
 
       setLoading(false);
-      setResultInfo(
-        `${driverResData.name} added with ref: ${driverResData.referenceNumber}`
-      );
 
       setTimeout(() => {
         navigate("/");
